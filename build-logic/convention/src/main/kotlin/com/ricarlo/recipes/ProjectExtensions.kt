@@ -28,12 +28,12 @@ internal fun Project.getLocalProperties(filename: String): Map<String, Any> {
     return props.entries.associate { entry ->
         val key = entry.key.toString()
             .replace(".", "_")
-            .replace("-","_")
+            .replace("-", "_")
             .uppercase()
 
         val value = entry.value
             .toString()
-            .replace("\"","\\\"")
+            .replace("\"", "\\\"")
 
         key to value
     }

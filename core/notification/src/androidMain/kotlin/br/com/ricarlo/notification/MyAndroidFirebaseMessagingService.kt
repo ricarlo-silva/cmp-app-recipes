@@ -3,12 +3,12 @@ package br.com.ricarlo.notification
 import android.app.NotificationManager
 import android.content.Intent
 import androidx.core.app.NotificationCompat
+import androidx.core.net.toUri
 import br.com.ricarlo.notification.core.IFcmHandler
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import androidx.core.net.toUri
 
 internal const val MESSAGE_KEY = "message"
 internal const val NOTIFICATION_TITLE_KEY = "title"

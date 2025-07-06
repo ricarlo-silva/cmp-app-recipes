@@ -4,7 +4,7 @@
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.1.10-blue.svg)](https://kotlinlang.org/)
 
 This project showcases a cross-platform mobile application (Android and iOS) built
-using [Compose Multiplatform (CMP)](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-create-first-app.html).
+using [Compose Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-create-first-app.html).
 It serves as a practical demonstration of developing a unified application across multiple platforms
 while seamlessly integrating platform-specific functionalities.
 

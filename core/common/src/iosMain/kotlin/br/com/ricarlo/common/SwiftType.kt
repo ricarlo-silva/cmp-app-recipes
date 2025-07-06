@@ -12,6 +12,7 @@ data class SwiftType(
     val type: ObjCObject,
     val swiftClazz: KClass<*>,
 )
+
 @OptIn(BetaInteropApi::class)
 fun SwiftType.getClazz(): KClass<*> =
     when (type) {

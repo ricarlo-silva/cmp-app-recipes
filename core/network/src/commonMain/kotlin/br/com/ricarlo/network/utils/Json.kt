@@ -12,7 +12,7 @@ val json = Json {
 inline fun <reified T> T.toJson(): String? = runCatching {
     json.encodeToString(this)
 }.onFailure {
-   it.logError()
+    it.logError()
 }.getOrNull()
 
 inline fun <reified T> fromJson(json: String?): T? {
