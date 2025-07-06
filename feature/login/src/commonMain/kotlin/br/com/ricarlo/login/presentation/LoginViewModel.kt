@@ -65,9 +65,9 @@ internal class LoginViewModel(
             }.onSuccess {
                 _state.update { it.loading(false) }
                 _sideEffect.emit(LoginSideEffect.Navigate(route = "home"))
-            }.onFailure {
+            }.onFailure { error ->
                 _state.update { it.loading(false) }
-                _sideEffect.emit(LoginSideEffect.ShowSnackbar("Error: ${it.message}"))
+                _sideEffect.emit(LoginSideEffect.ShowSnackbar("Error: ${error.message}"))
             }
         }
     }

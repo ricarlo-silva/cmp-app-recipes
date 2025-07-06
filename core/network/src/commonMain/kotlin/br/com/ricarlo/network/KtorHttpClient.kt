@@ -22,8 +22,8 @@ import kotlinx.serialization.json.Json
 
 object KtorHttpClient {
     fun httpClient(
-        plugins: Array<HttpClientPlugin<Any, Any>> = emptyArray(),
-        tokenManager: TokenManager = TokenManager()
+        plugins: List<HttpClientPlugin<Any, Any>> = emptyList(),
+        tokenManager: TokenManager
     ) = HttpClient {
         defaultRequest {
             host = BuildConfig.BASE_URL

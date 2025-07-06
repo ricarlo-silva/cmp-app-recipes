@@ -2,12 +2,11 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.recipes.convention.publish)
-    alias(libs.plugins.recipes.convention.config)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -25,20 +24,6 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
-        version = "1.0"
-        ios.deploymentTarget = "16.0"
-        podfile = project.file("../iosApp/Podfile")
-        framework {
-            baseName = "shared"
-            isStatic = true
-            export(projects.core.common)
-            export(projects.core.notification)
-        }
-    }
-
     sourceSets {
         androidMain.dependencies {
             implementation(compose.preview)
@@ -51,24 +36,19 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
-            api(projects.core.designsystem)
-            api(projects.core.network)
-            api(projects.core.common)
-            api(projects.core.notification)
-            api(projects.feature.login)
-            api(projects.feature.home)
-        }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-            implementation(libs.koin.test)
+
+            implementation(projects.core.common)
+            implementation(projects.core.designsystem)
+            implementation(projects.core.network)
         }
     }
 }
 
 android {
-    namespace = "br.com.ricarlo.cmp_app_recipes"
+    namespace = "br.com.ricarlo.home"
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()

@@ -21,6 +21,7 @@ internal class DeepLinkHandler(
             EventBus.send(event = NavUri(uri))
         }
     }
+
     override fun processMessage(remoteMessage: Map<String, Any>) {
         if (remoteMessage.isEmpty()) return
         val uri = remoteMessage[NOTIFICATION_URI_KEY] as? String

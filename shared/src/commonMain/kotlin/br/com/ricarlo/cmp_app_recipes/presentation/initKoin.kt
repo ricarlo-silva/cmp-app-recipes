@@ -1,6 +1,7 @@
 package br.com.ricarlo.cmp_app_recipes.presentation
 
 import br.com.ricarlo.common.di.commonModule
+import br.com.ricarlo.home.di.homeModule
 import br.com.ricarlo.login.di.loginModule
 import br.com.ricarlo.network.networkModule
 import br.com.ricarlo.notification.di.notificationModule
@@ -15,7 +16,8 @@ fun initKoin(config: KoinAppDeclaration? = null) {
             commonModule,
             networkModule,
             loginModule,
-            notificationModule
+            notificationModule,
+            homeModule
         )
     }
 }

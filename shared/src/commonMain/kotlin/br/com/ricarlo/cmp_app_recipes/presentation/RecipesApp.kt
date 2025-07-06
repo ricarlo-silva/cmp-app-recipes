@@ -13,6 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navDeepLink
 import androidx.savedstate.read
 import br.com.ricarlo.designsystem.MyApplicationTheme
+import br.com.ricarlo.home.presentation.HomeScreen
 import br.com.ricarlo.login.presentation.LoginScreen
 import br.com.ricarlo.network.utils.logger
 import br.com.ricarlo.shared.BuildConfig
