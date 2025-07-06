@@ -1,7 +1,7 @@
 package br.com.ricarlo.home.domain.repository
 
-import br.com.ricarlo.home.data.remote.FruitResponse
+import br.com.ricarlo.home.domain.model.Fruit
 
-interface HomeRepository {
-    suspend fun getFruits(): List<FruitResponse>
+internal interface HomeRepository {
+    suspend fun getFruits(): List<Fruit>
 }

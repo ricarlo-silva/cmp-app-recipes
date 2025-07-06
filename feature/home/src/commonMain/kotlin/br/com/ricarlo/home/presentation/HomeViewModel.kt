@@ -3,7 +3,6 @@ package br.com.ricarlo.home.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.ricarlo.home.domain.repository.HomeRepository
-import br.com.ricarlo.network.utils.logError
 import br.com.ricarlo.network.utils.toJson
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,7 +11,7 @@ import kotlinx.coroutines.launch
 
 internal class HomeViewModel(
     private val homeRepository: HomeRepository
-): ViewModel() {
+) : ViewModel() {
     private val _state = MutableStateFlow("Loading...")
     val state = _state.asStateFlow()
 
@@ -22,8 +21,8 @@ internal class HomeViewModel(
                 homeRepository.getFruits()
             }.onSuccess { response ->
                 _state.update { response.toJson().orEmpty() }
-            }.onFailure {
-                it.logError()
+            }.onFailure { error ->
+                _state.update { error.message.orEmpty() }
             }
         }
     }
