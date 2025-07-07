@@ -4,7 +4,6 @@ kotlin = "2.2.0"
 compose = "1.8.3"
 androidx-activityCompose = "1.10.1"
 compose-multiplatform = "1.8.2"
-androidx-lifecycle = "2.9.1"
 permissions = "0.19.1"
 junit = "1.2.1"
 compileSdk = "36"
@@ -20,8 +19,6 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
-androidx-lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
-androidx-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junit" }
 
 firebase-bom = { module = "com.google.firebase:firebase-bom", version = "33.16.0" }
