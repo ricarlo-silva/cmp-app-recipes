@@ -15,7 +15,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: 17
+          java-version: 21
           distribution: temurin
 
       - name: Decode and Write Google Service Files
@@ -60,7 +60,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: 17
+          java-version: 21
           distribution: temurin
 
       - name: Decode and Write Google Service Files

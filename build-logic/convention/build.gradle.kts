@@ -5,11 +5,11 @@ plugins {
 group = "br.com.ricarlo.build_logic.convention"
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(11))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 kotlin {
-    jvmToolchain(11)
+    jvmToolchain(21)
 }
 
 dependencies {
