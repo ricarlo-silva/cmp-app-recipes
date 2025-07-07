@@ -28,9 +28,9 @@ gradlePlugin {
             id = "recipes.convention.publish"
             implementationClass = "MavenPublishConventionPlugin"
         }
-        register("buildConfig") {
-            id = "recipes.convention.config"
-            implementationClass = "BuildConfigPlugin"
+        register("multiplatform") {
+            id = "recipes.convention.multiplatform"
+            implementationClass = "MultiplatformPlugin"
         }
     }
 }
