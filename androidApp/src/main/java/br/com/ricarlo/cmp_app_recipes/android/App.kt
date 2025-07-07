@@ -1,6 +1,7 @@
 package br.com.ricarlo.cmp_app_recipes.android
 
 import android.app.Application
+import android.os.Build
 import android.os.StrictMode
 import br.com.ricarlo.cmp_app_recipes.presentation.initKoin
 import org.koin.android.ext.koin.androidContext
@@ -18,6 +19,13 @@ internal class App : Application() {
                     .penaltyLog()
                     .build()
             )
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                StrictMode.setVmPolicy(
+                    StrictMode.VmPolicy.Builder()
+                        .detectAll()
+                        .build()
+                )
+            }
         }
         initKoin {
             androidContext(applicationContext)
