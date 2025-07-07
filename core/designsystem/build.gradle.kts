@@ -1,7 +1,6 @@
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.recipes.convention.library)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.recipes.convention.publish)
@@ -30,18 +29,6 @@ kotlin {
 
 compose.resources {
     publicResClass = true
-}
-
-android {
-    namespace = "br.com.ricarlo.designsystem"
-    compileSdk = libs.versions.compileSdk.get().toInt()
-    defaultConfig {
-        minSdk = libs.versions.minSdk.get().toInt()
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
 }
 
 dependencies {

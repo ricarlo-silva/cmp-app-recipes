@@ -32,5 +32,9 @@ gradlePlugin {
             id = "recipes.convention.multiplatform"
             implementationClass = "MultiplatformPlugin"
         }
+        register("androidLibrary") {
+            id = "recipes.convention.library"
+            implementationClass = "AndroidLibraryPlugin"
+        }
     }
 }

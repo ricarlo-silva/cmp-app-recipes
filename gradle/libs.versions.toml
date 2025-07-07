@@ -70,3 +70,4 @@ modulegraph = { id = "dev.iurysouza.modulegraph", version = "0.12.0" }
 #
 recipes-convention-publish = { id = "recipes.convention.publish", version = "unspecified" }
 recipes-convention-multiplatform = { id = "recipes.convention.multiplatform", version = "unspecified" }
+recipes-convention-library = { id = "recipes.convention.library", version = "unspecified" }

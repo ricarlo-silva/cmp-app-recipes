@@ -1,8 +1,7 @@
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCocoapods)
-    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.recipes.convention.library)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.recipes.convention.publish)
@@ -40,18 +39,6 @@ kotlin {
             api(projects.feature.login)
             api(projects.feature.home)
         }
-    }
-}
-
-android {
-    namespace = "br.com.ricarlo.cmp_app_recipes"
-    compileSdk = libs.versions.compileSdk.get().toInt()
-    defaultConfig {
-        minSdk = libs.versions.minSdk.get().toInt()
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
     }
 }
 

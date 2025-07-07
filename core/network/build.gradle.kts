@@ -1,7 +1,6 @@
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.recipes.convention.library)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.recipes.convention.publish)
     alias(libs.plugins.recipes.convention.multiplatform)
@@ -26,17 +25,5 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
-    }
-}
-
-android {
-    namespace = "br.com.ricarlo.network"
-    compileSdk = libs.versions.compileSdk.get().toInt()
-    defaultConfig {
-        minSdk = libs.versions.minSdk.get().toInt()
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
     }
 }
