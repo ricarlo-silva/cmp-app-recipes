@@ -1,20 +1,16 @@
 [versions]
-agp = "8.10.1"
-kotlin = "2.1.20"
-compose = "1.8.2"
-compose-material3 = "1.3.2"
+agp = "8.11.0"
+kotlin = "2.2.0"
+compose = "1.8.3"
 androidx-activityCompose = "1.10.1"
-compose-multiplatform = "1.8.1"
-androidx-lifecycle = "2.8.4"
+compose-multiplatform = "1.8.2"
 permissions = "0.19.1"
-runner = "1.6.2"
-core = "1.6.1"
 junit = "1.2.1"
-compileSdk = "35"
+compileSdk = "36"
 minSdk = "26"
-targetSdk = "35"
-ktor = "3.1.2"
-coroutines = "1.10.1"
+targetSdk = "36"
+ktor = "3.2.1"
+coroutines = "1.10.2"
 koin = "4.1.0"
 
 [libraries]
@@ -23,14 +19,9 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
-androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
-androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
-androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
-androidx-core = { group = "androidx.test", name = "core", version.ref = "core" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
+androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junit" }
 
-firebase-bom = { module = "com.google.firebase:firebase-bom", version = "33.15.0" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version = "33.16.0" }
 firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-messaging-ktx = { module = "com.google.firebase:firebase-messaging-ktx" }
 
@@ -50,7 +41,6 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 koin-navigation = { module = "io.insert-koin:koin-compose-viewmodel-navigation", version.ref = "koin" }
-koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 
 permissions-compose = { module = "dev.icerock.moko:permissions-compose", version.ref = "permissions" }
 permissions-notifications = { module = "dev.icerock.moko:permissions-notifications", version.ref = "permissions" }
@@ -73,10 +63,10 @@ kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = 
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
-google-services = { id = "com.google.gms.google-services", version = "4.4.2" }
+google-services = { id = "com.google.gms.google-services", version = "4.4.3" }
 modulegraph = { id = "dev.iurysouza.modulegraph", version = "0.12.0" }
 
 #
 recipes-convention-publish = { id = "recipes.convention.publish", version = "unspecified" }
-recipes-convention-config = { id = "recipes.convention.config", version = "unspecified"}
+recipes-convention-multiplatform = { id = "recipes.convention.multiplatform", version = "unspecified" }
+recipes-convention-library = { id = "recipes.convention.library", version = "unspecified" }

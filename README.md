@@ -101,7 +101,7 @@ This project leverages the following powerful technologies:
 Get started with the project by following these steps:
 
 1. **Prerequisites:** Ensure the following tools are installed on your system:
-    * **Java Development Kit (JDK):** Version 11 or higher is required.
+    * **Java Development Kit (JDK):** Version 21 or higher is required.
     * **Android Studio:** Download and install from
       the [official website](https://developer.android.com/studio).
     * **Xcode:** Install from the [Mac App Store](https://apps.apple.com/us/app/xcode/id497799835).

@@ -5,11 +5,11 @@ plugins {
 group = "br.com.ricarlo.build_logic.convention"
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(11))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 kotlin {
-    jvmToolchain(11)
+    jvmToolchain(21)
 }
 
 dependencies {
@@ -28,9 +28,13 @@ gradlePlugin {
             id = "recipes.convention.publish"
             implementationClass = "MavenPublishConventionPlugin"
         }
-        register("buildConfig") {
-            id = "recipes.convention.config"
-            implementationClass = "BuildConfigPlugin"
+        register("multiplatform") {
+            id = "recipes.convention.multiplatform"
+            implementationClass = "MultiplatformPlugin"
+        }
+        register("androidLibrary") {
+            id = "recipes.convention.library"
+            implementationClass = "AndroidLibraryPlugin"
         }
     }
 }
