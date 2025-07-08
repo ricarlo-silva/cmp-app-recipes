@@ -12,9 +12,9 @@ internal class AndroidLibraryPlugin : Plugin<Project> {
         }
         extensions.configure<LibraryExtension> {
             namespace = "br.com.ricarlo.$name"
-            compileSdk = libs.findVersion("compileSdk").get().toString().toInt()
+            compileSdk = libs.findVersion("compileSdk").get().requiredVersion.toInt()
             defaultConfig {
-                minSdk = libs.findVersion("minSdk").get().toString().toInt()
+                minSdk = libs.findVersion("minSdk").get().requiredVersion.toInt()
             }
             compileOptions {
                 sourceCompatibility = JavaVersion.VERSION_21

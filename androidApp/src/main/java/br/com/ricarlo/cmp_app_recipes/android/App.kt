@@ -19,7 +19,7 @@ internal class App : Application() {
                     .penaltyLog()
                     .build()
             )
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 StrictMode.setVmPolicy(
                     StrictMode.VmPolicy.Builder()
                         .detectAll()
