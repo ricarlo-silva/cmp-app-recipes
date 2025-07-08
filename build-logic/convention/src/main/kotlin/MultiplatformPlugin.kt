@@ -11,8 +11,8 @@ internal class MultiplatformPlugin : Plugin<Project> {
         with(pluginManager) {
             apply(libs.findPlugin("kotlinMultiplatform").get().get().pluginId)
         }
-        extensions.configure<KotlinMultiplatformExtension>(::configureBuildConfig)
         extensions.configure<KotlinMultiplatformExtension> {
+            configureBuildConfig(this)
             androidTarget {
                 compilations.all {
                     compileTaskProvider.configure {
