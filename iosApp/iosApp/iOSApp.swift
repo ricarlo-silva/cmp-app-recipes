@@ -1,4 +1,5 @@
 import FirebaseCore
+import FirebaseCrashlytics
 import FirebaseMessaging
 import SwiftUI
 import UserNotifications
@@ -17,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .LaunchOptionsKey: Any]?
     ) -> Bool {
         FirebaseApp.configure()
+        Crashlytics.crashlytics().setCrashlyticsCollectionEnabled(true)
 
         // [START set_messaging_delegate]
         Messaging.messaging().delegate = self

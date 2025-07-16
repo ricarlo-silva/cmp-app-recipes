@@ -3,6 +3,8 @@ package br.com.ricarlo.login.presentation
 import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.ricarlo.common.CrashlyticsLogger
+import br.com.ricarlo.login.BuildConfig
 import br.com.ricarlo.login.domain.repository.AuthRepository
 import dev.icerock.moko.permissions.DeniedAlwaysException
 import dev.icerock.moko.permissions.DeniedException
@@ -18,7 +20,8 @@ import kotlinx.coroutines.launch
 
 internal class LoginViewModel(
     val permissionsController: PermissionsController,
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val crashlyticsLogger: CrashlyticsLogger,
 ) : ViewModel() {
     private val _state = MutableStateFlow(LoginState())
     val state = _state.asStateFlow()
@@ -28,6 +31,8 @@ internal class LoginViewModel(
 
     init {
         requestPermission(Permission.REMOTE_NOTIFICATION)
+        crashlyticsLogger.setCustomKey(key = "FLAVOR", value = BuildConfig.FLAVOR)
+        crashlyticsLogger.recordException(NoSuchElementException("test..."))
     }
 
     fun onAction(action: LoginAction) {
@@ -62,6 +67,7 @@ internal class LoginViewModel(
                     username = state.value.username,
                     password = state.value.password
                 )
+                crashlyticsLogger.setUserId(userId = state.value.username)
             }.onSuccess {
                 _state.update { it.loading(false) }
                 _sideEffect.emit(LoginSideEffect.Navigate(route = "home"))
