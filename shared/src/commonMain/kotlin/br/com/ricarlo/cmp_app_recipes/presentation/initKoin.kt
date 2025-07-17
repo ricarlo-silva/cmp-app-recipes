@@ -6,10 +6,11 @@ import br.com.ricarlo.login.di.loginModule
 import br.com.ricarlo.network.networkModule
 import br.com.ricarlo.notification.di.notificationModule
 import org.koin.core.context.startKoin
+import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.includes
 
-fun initKoin(config: KoinAppDeclaration? = null) {
+fun initKoin(includeModule: Module, config: KoinAppDeclaration? = null) {
     startKoin {
         includes(config)
         modules(
@@ -17,7 +18,8 @@ fun initKoin(config: KoinAppDeclaration? = null) {
             networkModule,
             loginModule,
             notificationModule,
-            homeModule
+            homeModule,
+            includeModule
         )
     }
 }

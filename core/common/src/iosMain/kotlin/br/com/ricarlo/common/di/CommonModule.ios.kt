@@ -1,11 +1,13 @@
 package br.com.ricarlo.common.di
 
 import br.com.ricarlo.common.CrashlyticsLogger
-import br.com.ricarlo.common.CrashlyticsLoggerImpl
 import org.koin.core.module.Module
-import org.koin.core.module.dsl.singleOf
-import org.koin.dsl.bind
+import org.koin.dsl.module
 
 internal actual fun Module.others() {
-    singleOf(::CrashlyticsLoggerImpl) bind CrashlyticsLogger::class
+
+}
+
+fun createIosModuleWithReporter(reporter: CrashlyticsLogger) = module {
+    single<CrashlyticsLogger> { reporter }
 }
