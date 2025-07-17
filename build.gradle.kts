@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform).apply(false)
     alias(libs.plugins.kotlin.serialization).apply(false)
     alias(libs.plugins.google.services).apply(false)
+    alias(libs.plugins.firebase.crashlytics).apply(false)
     alias(libs.plugins.modulegraph).apply(true)
 }
 
