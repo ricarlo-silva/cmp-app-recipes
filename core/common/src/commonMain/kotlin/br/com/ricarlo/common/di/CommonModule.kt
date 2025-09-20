@@ -14,7 +14,7 @@ import org.koin.dsl.module
 val commonModule = module {
     singleOf(::DeepLinkHandler) bind IDeepLinkHandler::class
     factory<CoroutineScope> { CoroutineScope(Dispatchers.IO + SupervisorJob()) }
-    others()
+    includeModule()
 }
 
-internal expect fun Module.others()
+internal expect fun Module.includeModule()

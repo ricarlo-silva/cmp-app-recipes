@@ -28,7 +28,15 @@ internal class CrashlyticsLoggerImpl(
 
     override fun setCustomKey(key: String, value: Any) {
         scope.launch {
-            firebaseCrashlytics.setCustomKey(key, "$value")
+            when (value) {
+                is Boolean -> firebaseCrashlytics.setCustomKey(key, value)
+                is Double -> firebaseCrashlytics.setCustomKey(key, value)
+                is Float -> firebaseCrashlytics.setCustomKey(key, value)
+                is Int -> firebaseCrashlytics.setCustomKey(key, value)
+                is Long -> firebaseCrashlytics.setCustomKey(key, value)
+                is String -> firebaseCrashlytics.setCustomKey(key, value)
+                else -> firebaseCrashlytics.setCustomKey(key, value.toString())
+            }
         }
     }
 }

@@ -32,7 +32,6 @@ internal class LoginViewModel(
     init {
         requestPermission(Permission.REMOTE_NOTIFICATION)
         crashlyticsLogger.setCustomKey(key = "FLAVOR", value = BuildConfig.FLAVOR)
-        crashlyticsLogger.recordException(NoSuchElementException("test..."))
     }
 
     fun onAction(action: LoginAction) {

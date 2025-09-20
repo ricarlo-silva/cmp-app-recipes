@@ -7,7 +7,7 @@ import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 
-internal actual fun Module.others() {
+internal actual fun Module.includeModule() {
     singleOf(::CrashlyticsLoggerImpl) bind CrashlyticsLogger::class
     single { FirebaseCrashlytics.getInstance() }
 }
