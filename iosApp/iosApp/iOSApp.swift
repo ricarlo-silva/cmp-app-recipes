@@ -1,4 +1,5 @@
 import FirebaseCore
+import FirebaseCrashlytics
 import FirebaseMessaging
 import SwiftUI
 import UserNotifications
@@ -8,6 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var fcmHandler: IFcmHandler = injectLazy()()
     lazy var deepLinkHandler: IDeepLinkHandler = injectLazy()()
+//    lazy var crashlyticsLogger: CrashlyticsLogger = injectLazy()()
 
     let gcmMessageIDKey = "gcm.message_id"
 
@@ -17,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .LaunchOptionsKey: Any]?
     ) -> Bool {
         FirebaseApp.configure()
+        Crashlytics.crashlytics().setCrashlyticsCollectionEnabled(true)
 
         // [START set_messaging_delegate]
         Messaging.messaging().delegate = self
@@ -220,7 +223,10 @@ extension AppDelegate: MessagingDelegate {
 struct iOSApp: App {
     
    init() {
-       InitKoinKt.doInitKoin()
+       InitKoinKt.doInitKoin(
+           includeModule: CommonModule_iosKt.createIosModuleWithReporter(reporter: CrashlyticsLoggerImpl()),
+           config: nil
+       )
    }
 
    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate

@@ -12,6 +12,7 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		318039E52DDEAA9E00D0E47F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 318039E42DDEAA9E00D0E47F /* GoogleService-Info.plist */; };
 		318039E72DE026FF00D0E47F /* KoinHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318039E62DE026FC00D0E47F /* KoinHelpers.swift */; };
+		31B8600D2E28A3C300599206 /* CrashlyticsLoggerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B8600C2E28A3BE00599206 /* CrashlyticsLoggerImpl.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		9757A9E94718FC537168C843 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AD6C2132FF15FB0B38F6B0 /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
@@ -23,6 +24,7 @@
 		24AD6C2132FF15FB0B38F6B0 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		318039E42DDEAA9E00D0E47F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		318039E62DE026FC00D0E47F /* KoinHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoinHelpers.swift; sourceTree = "<group>"; };
+		31B8600C2E28A3BE00599206 /* CrashlyticsLoggerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashlyticsLoggerImpl.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				31B8600C2E28A3BE00599206 /* CrashlyticsLoggerImpl.swift */,
 				318039E62DE026FC00D0E47F /* KoinHelpers.swift */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
@@ -112,6 +115,8 @@
 				538A5EACDCB78535FB64FA0C /* Frameworks */,
 				3D08C70852322BCFF2271F57 /* [CP] Copy Pods Resources */,
 				7C8B270278C7F418102FF38C /* [CP] Embed Pods Frameworks */,
+				3160D8582E25DF36003800F2 /* ShellScript */,
+				3160D8592E25E773003800F2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -169,6 +174,42 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3160D8582E25DF36003800F2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}\n",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		3160D8592E25E773003800F2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/FirebaseCrashlytics/upload-symbols -gsp ${PROJECT_DIR}/iosApp/GoogleService-Info.plist -p ios ${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\n\n";
+		};
 		3D08C70852322BCFF2271F57 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -233,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				318039E72DE026FF00D0E47F /* KoinHelpers.swift in Sources */,
+				31B8600D2E28A3C300599206 /* CrashlyticsLoggerImpl.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);
