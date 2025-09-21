@@ -6,10 +6,11 @@ import UserNotifications
 import shared
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+
     lazy var fcmHandler: IFcmHandler = injectLazy()()
     lazy var deepLinkHandler: IDeepLinkHandler = injectLazy()()
-//    lazy var crashlyticsLogger: CrashlyticsLogger = injectLazy()()
+    //    lazy var crashlyticsLogger: CrashlyticsLogger = injectLazy()()
+    lazy var remoteConfig: RemoteConfigProvider = injectLazy()()
 
     let gcmMessageIDKey = "gcm.message_id"
 
@@ -20,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         FirebaseApp.configure()
         Crashlytics.crashlytics().setCrashlyticsCollectionEnabled(true)
+        Task {
+            try? await self.remoteConfig.fetchAndActivate()
+        }
 
         // [START set_messaging_delegate]
         Messaging.messaging().delegate = self
@@ -31,11 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UNUserNotificationCenter.current().delegate = self
 
-//         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-//         UNUserNotificationCenter.current().requestAuthorization(
-//             options: authOptions,
-//             completionHandler: { _, _ in }
-//         )
+        //         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        //         UNUserNotificationCenter.current().requestAuthorization(
+        //             options: authOptions,
+        //             completionHandler: { _, _ in }
+        //         )
 
         application.registerForRemoteNotifications()
 
@@ -97,7 +101,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFailToRegisterForRemoteNotificationsWithError error: Error
     ) {
-        print("Unable to register for remote notifications: \(error.localizedDescription)")
+        print(
+            "Unable to register for remote notifications: \(error.localizedDescription)"
+        )
     }
 
     // This function is added here only for debugging purposes, and can be removed if swizzling is enabled.
@@ -114,14 +120,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // Handles deep links when the app is launched by a URL
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+    func application(
+        _ app: UIApplication,
+        open url: URL,
+        options: [UIApplication.OpenURLOptionsKey: Any] = [:]
+    ) -> Bool {
         handleDeepLink(url: url)
         return true
     }
 
     // Handles deep links while the app is in the foreground or background (optional)
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        if userActivity.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity.webpageURL {
+    func application(
+        _ application: UIApplication,
+        continue userActivity: NSUserActivity,
+        restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
+    ) -> Bool {
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+            let url = userActivity.webpageURL
+        {
             handleDeepLink(url: url)
             return true
         }
@@ -174,7 +190,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             print("Message ID: \(messageID)")
         }
         // [END_EXCLUDE]
-        
+
         fcmHandler.onClickMessage(remoteMessage: convertUserInfo(userInfo))
 
         // With swizzling disabled you must let Messaging know about the message, for Analytics
@@ -185,14 +201,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 }
 
-func convertUserInfo(_ userInfo: [AnyHashable: Any]) -> [String : Any] {
+func convertUserInfo(_ userInfo: [AnyHashable: Any]) -> [String: Any] {
     var stringDict: [String: Any] = [:]
-    
+
     for (key, value) in userInfo {
         guard let stringKey = key as? String else { continue }
         stringDict[stringKey] = value
     }
-    
+
     return stringDict
 }
 
@@ -201,7 +217,8 @@ func convertUserInfo(_ userInfo: [AnyHashable: Any]) -> [String : Any] {
 extension AppDelegate: MessagingDelegate {
     // [START refresh_token]
     func messaging(
-        _ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?
+        _ messaging: Messaging,
+        didReceiveRegistrationToken fcmToken: String?
     ) {
         print("Firebase registration token: \(String(describing: fcmToken))")
 
@@ -221,15 +238,18 @@ extension AppDelegate: MessagingDelegate {
 
 @main
 struct iOSApp: App {
-    
-   init() {
-       InitKoinKt.doInitKoin(
-           includeModule: CommonModule_iosKt.createIosModuleWithReporter(reporter: CrashlyticsLoggerImpl()),
-           config: nil
-       )
-   }
 
-   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    init() {
+        InitKoinKt.doInitKoin(
+            includeModule: CommonModule_iosKt.createIosModule(
+                reporter: CrashlyticsLoggerImpl(),
+                remoteConfigProvider: RemoteConfigProviderImpl()
+            ),
+            config: nil
+        )
+    }
+
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     var body: some Scene {
         WindowGroup {

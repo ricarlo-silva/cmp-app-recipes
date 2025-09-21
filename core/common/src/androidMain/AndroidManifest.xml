@@ -5,5 +5,8 @@
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
             android:value="true" />
+        <meta-data
+            android:name="com.google.firebase.remoteconfig.FirebaseRemoteConfig"
+            android:value="true" />
     </application>
 </manifest>

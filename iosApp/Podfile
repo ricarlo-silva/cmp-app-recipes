@@ -5,4 +5,5 @@ target 'iosApp' do
   pod 'FirebaseAnalytics'
   pod 'FirebaseMessaging'
   pod 'FirebaseCrashlytics'
+  pod 'FirebaseRemoteConfig'
 end

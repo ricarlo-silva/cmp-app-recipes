@@ -4,6 +4,8 @@ import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.ricarlo.common.CrashlyticsLogger
+import br.com.ricarlo.common.RemoteConfigKey
+import br.com.ricarlo.common.RemoteConfigProvider
 import br.com.ricarlo.login.BuildConfig
 import br.com.ricarlo.login.domain.repository.AuthRepository
 import dev.icerock.moko.permissions.DeniedAlwaysException
@@ -22,6 +24,7 @@ internal class LoginViewModel(
     val permissionsController: PermissionsController,
     private val authRepository: AuthRepository,
     private val crashlyticsLogger: CrashlyticsLogger,
+    private val remoteConfig: RemoteConfigProvider
 ) : ViewModel() {
     private val _state = MutableStateFlow(LoginState())
     val state = _state.asStateFlow()
@@ -32,6 +35,15 @@ internal class LoginViewModel(
     init {
         requestPermission(Permission.REMOTE_NOTIFICATION)
         crashlyticsLogger.setCustomKey(key = "FLAVOR", value = BuildConfig.FLAVOR)
+
+        val welcomeMessage = remoteConfig.getString(RemoteConfigKey.WELCOME_MESSAGE.key)
+        val googleLoginEnabled = remoteConfig.getBoolean(RemoteConfigKey.GOOGLE_LOGIN_ENABLED.key)
+        _state.update {
+            it.copy(
+                welcomeMessage = welcomeMessage,
+                googleLoginEnabled = googleLoginEnabled
+            )
+        }
     }
 
     fun onAction(action: LoginAction) {
@@ -116,10 +128,12 @@ internal class LoginViewModel(
 
 @Stable
 data class LoginState(
+    val welcomeMessage: String = "",
     val username: String = "",
     val password: String = "",
     val isLoading: Boolean = false,
     val passwordVisible: Boolean = false,
+    val googleLoginEnabled: Boolean = false
 ) {
     fun withUsername(username: String) = copy(username = username)
     fun withPassword(password: String) = copy(password = password)

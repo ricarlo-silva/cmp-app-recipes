@@ -55,7 +55,6 @@ import br.com.ricarlo.designsystem.generated.resources.visibility_on
 import br.com.ricarlo.designsystem.spacing
 import br.com.ricarlo.designsystem.stroke
 import br.com.ricarlo.login.generated.resources.Res
-import br.com.ricarlo.login.generated.resources.access_title
 import br.com.ricarlo.login.generated.resources.create_account
 import br.com.ricarlo.login.generated.resources.forgot_password
 import br.com.ricarlo.login.generated.resources.google_login
@@ -136,7 +135,7 @@ internal fun LoginContent(
             TopAppBar(
                 title = {
                     Text(
-                        text = stringResource(Res.string.access_title),
+                        text = state.welcomeMessage,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -255,35 +254,37 @@ internal fun LoginContent(
                 }
             }
 
-            Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
+            if (state.googleLoginEnabled) {
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
 
-            DividerWithText(
-                text = stringResource(Res.string.other_access),
-            )
-
-            Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
-
-            OutlinedButton(
-                onClick = {
-                    onAction(LoginAction.GoogleLoginClicked)
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp),
-                shape = MaterialTheme.shapes.small,
-                enabled = !state.isLoading,
-                border = BorderStroke(
-                    width = MaterialTheme.stroke.extraSmall,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f)
-                ),
-            ) {
-                Icon(
-                    painter = painterResource(DesignSystemRes.drawable.google),
-                    contentDescription = null,
-                    modifier = Modifier.size(ButtonDefaults.IconSize)
+                DividerWithText(
+                    text = stringResource(Res.string.other_access),
                 )
-                Spacer(modifier = Modifier.width(MaterialTheme.spacing.small))
-                Text(text = stringResource(Res.string.google_login))
+
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
+
+                OutlinedButton(
+                    onClick = {
+                        onAction(LoginAction.GoogleLoginClicked)
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(50.dp),
+                    shape = MaterialTheme.shapes.small,
+                    enabled = !state.isLoading,
+                    border = BorderStroke(
+                        width = MaterialTheme.stroke.extraSmall,
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f)
+                    ),
+                ) {
+                    Icon(
+                        painter = painterResource(DesignSystemRes.drawable.google),
+                        contentDescription = null,
+                        modifier = Modifier.size(ButtonDefaults.IconSize)
+                    )
+                    Spacer(modifier = Modifier.width(MaterialTheme.spacing.small))
+                    Text(text = stringResource(Res.string.google_login))
+                }
             }
 
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
