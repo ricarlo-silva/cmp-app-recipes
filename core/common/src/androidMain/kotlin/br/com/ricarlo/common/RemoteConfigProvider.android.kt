@@ -1,15 +1,45 @@
 package br.com.ricarlo.common
 
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.ConfigUpdate
+import com.google.firebase.remoteconfig.ConfigUpdateListener
 import com.google.firebase.remoteconfig.CustomSignals
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigException
+import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
+private const val FETCH_INTERVAL = 3600L
+
 internal class RemoteConfigProviderImpl(
-    private val remoteConfig: FirebaseRemoteConfig,
+    private val crashlytics: CrashlyticsLogger,
     private val scope: CoroutineScope
 ) : RemoteConfigProvider {
+
+    private val remoteConfig: FirebaseRemoteConfig by lazy {
+        Firebase.remoteConfig.apply {
+            setConfigSettingsAsync(remoteConfigSettings {
+                minimumFetchIntervalInSeconds = if (BuildConfig.isUAT) 0 else FETCH_INTERVAL
+            })
+
+            setDefaultsAsync(RemoteConfigKey.defaultConfig())
+
+            addOnConfigUpdateListener(object : ConfigUpdateListener {
+                override fun onUpdate(configUpdate: ConfigUpdate) {
+                    if (configUpdate.updatedKeys.isNotEmpty()) {
+                        activate()
+                    }
+                }
+
+                override fun onError(p0: FirebaseRemoteConfigException) {
+                    crashlytics.log("Error listening for config updates: ${p0.message}")
+                }
+            })
+        }
+    }
 
     init {
         fetchAndActivate()
