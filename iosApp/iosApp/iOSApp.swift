@@ -6,12 +6,13 @@ import UserNotifications
 import shared
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    lazy var fcmHandler: IFcmHandler = injectLazy()()
-    lazy var deepLinkHandler: IDeepLinkHandler = injectLazy()()
-//    lazy var crashlyticsLogger: CrashlyticsLogger = injectLazy()()
 
-    let gcmMessageIDKey = "gcm.message_id"
+    private lazy var fcmHandler: IFcmHandler = injectLazy()()
+    private lazy var deepLinkHandler: IDeepLinkHandler = injectLazy()()
+    private lazy var crashlytics: CrashlyticsLogger = injectLazy()()
+    private lazy var remoteConfig: RemoteConfigProvider = injectLazy()()
+
+    private let gcmMessageIDKey = "gcm.message_id"
 
     func application(
         _ application: UIApplication,
@@ -20,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         FirebaseApp.configure()
         Crashlytics.crashlytics().setCrashlyticsCollectionEnabled(true)
+        remoteConfig.fetchAndActivate()
 
         // [START set_messaging_delegate]
         Messaging.messaging().delegate = self
@@ -31,11 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UNUserNotificationCenter.current().delegate = self
 
-//         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-//         UNUserNotificationCenter.current().requestAuthorization(
-//             options: authOptions,
-//             completionHandler: { _, _ in }
-//         )
+        //         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        //         UNUserNotificationCenter.current().requestAuthorization(
+        //             options: authOptions,
+        //             completionHandler: { _, _ in }
+        //         )
 
         application.registerForRemoteNotifications()
 
@@ -58,11 +60,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+            crashlytics.log(message: "Message ID: \(messageID)")
         }
 
         // Print full message.
-        print(userInfo)
+        crashlytics.log(message: "User \(userInfo)")
     }
 
     // [START receive_message]
@@ -82,11 +84,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+            crashlytics.log(message: "Message ID: \(messageID)")
         }
 
         // Print full message.
-        print(userInfo)
+        crashlytics.log(message: "User \(userInfo)")
 
         return UIBackgroundFetchResult.newData
     }
@@ -97,7 +99,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFailToRegisterForRemoteNotificationsWithError error: Error
     ) {
-        print("Unable to register for remote notifications: \(error.localizedDescription)")
+        crashlytics.log(
+            message: "Unable to register for remote notifications: \(error.localizedDescription)"
+        )
     }
 
     // This function is added here only for debugging purposes, and can be removed if swizzling is enabled.
@@ -107,21 +111,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
-        print("APNs token retrieved: \(deviceToken)")
+        crashlytics.log(message: "APNs token retrieved: \(deviceToken)")
 
         // With swizzling disabled you must set the APNs token here.
         // Messaging.messaging().apnsToken = deviceToken
     }
 
     // Handles deep links when the app is launched by a URL
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+    func application(
+        _ app: UIApplication,
+        open url: URL,
+        options: [UIApplication.OpenURLOptionsKey: Any] = [:]
+    ) -> Bool {
         handleDeepLink(url: url)
         return true
     }
 
     // Handles deep links while the app is in the foreground or background (optional)
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        if userActivity.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity.webpageURL {
+    func application(
+        _ application: UIApplication,
+        continue userActivity: NSUserActivity,
+        restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
+    ) -> Bool {
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+            let url = userActivity.webpageURL
+        {
             handleDeepLink(url: url)
             return true
         }
@@ -151,12 +165,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // [START_EXCLUDE]
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+            crashlytics.log(message: "Message ID: \(messageID)")
         }
         // [END_EXCLUDE]
 
         // Print full message.
-        print(userInfo)
+        crashlytics.log(message: "User \(userInfo)")
 
         // Change this to your preferred presentation option
         return [[.alert, .sound]]
@@ -171,28 +185,28 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // [START_EXCLUDE]
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+            crashlytics.log(message: "Message ID: \(messageID)")
         }
         // [END_EXCLUDE]
-        
+
         fcmHandler.onClickMessage(remoteMessage: convertUserInfo(userInfo))
 
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         // Messaging.messaging().appDidReceiveMessage(userInfo)
 
         // Print full message.
-        print(userInfo)
+        crashlytics.log(message: "User \(userInfo)")
     }
 }
 
-func convertUserInfo(_ userInfo: [AnyHashable: Any]) -> [String : Any] {
+func convertUserInfo(_ userInfo: [AnyHashable: Any]) -> [String: Any] {
     var stringDict: [String: Any] = [:]
-    
+
     for (key, value) in userInfo {
         guard let stringKey = key as? String else { continue }
         stringDict[stringKey] = value
     }
-    
+
     return stringDict
 }
 
@@ -201,9 +215,10 @@ func convertUserInfo(_ userInfo: [AnyHashable: Any]) -> [String : Any] {
 extension AppDelegate: MessagingDelegate {
     // [START refresh_token]
     func messaging(
-        _ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?
+        _ messaging: Messaging,
+        didReceiveRegistrationToken fcmToken: String?
     ) {
-        print("Firebase registration token: \(String(describing: fcmToken))")
+        crashlytics.log(message: "Firebase registration token: \(String(describing: fcmToken))")
 
         let dataDict: [String: String] = ["token": fcmToken ?? ""]
         NotificationCenter.default.post(
@@ -221,15 +236,18 @@ extension AppDelegate: MessagingDelegate {
 
 @main
 struct iOSApp: App {
-    
-   init() {
-       InitKoinKt.doInitKoin(
-           includeModule: CommonModule_iosKt.createIosModuleWithReporter(reporter: CrashlyticsLoggerImpl()),
-           config: nil
-       )
-   }
 
-   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    init() {
+        InitKoinKt.doInitKoin(
+            includeModule: CommonModule_iosKt.createIosModule(
+                reporter: CrashlyticsLoggerImpl(),
+                remoteConfigProvider: RemoteConfigProviderImpl()
+            ),
+            config: nil
+        )
+    }
+
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     var body: some Scene {
         WindowGroup {

@@ -8,21 +8,29 @@
 import FirebaseCrashlytics
 import shared
 
-internal class CrashlyticsLoggerImpl : NSObject, CrashlyticsLogger {
+internal class CrashlyticsLoggerImpl: NSObject, CrashlyticsLogger {
+
+    private lazy var crashlytics: Crashlytics = {
+        Crashlytics.crashlytics()
+    }()
 
     func log(message: String) {
-        Crashlytics.crashlytics().log(message)
+        #if DEBUG
+            print(message)
+        #else
+            crashlytics.log(message)
+        #endif
     }
 
     func recordException(throwable: KotlinThrowable) {
-        Crashlytics.crashlytics().record(error: throwable.asError())
+        crashlytics.record(error: throwable.asError())
     }
 
     func setCustomKey(key: String, value: Any) {
-        Crashlytics.crashlytics().setCustomValue(value, forKey: key)
+        crashlytics.setCustomValue(value, forKey: key)
     }
 
     func setUserId(userId: String) {
-        Crashlytics.crashlytics().setUserID(userId)
+        crashlytics.setUserID(userId)
     }
 }

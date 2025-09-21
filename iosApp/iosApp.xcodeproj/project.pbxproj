@@ -14,6 +14,7 @@
 		318039E72DE026FF00D0E47F /* KoinHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318039E62DE026FC00D0E47F /* KoinHelpers.swift */; };
 		31B8600D2E28A3C300599206 /* CrashlyticsLoggerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B8600C2E28A3BE00599206 /* CrashlyticsLoggerImpl.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		7C94940288C52B56A647A896 /* RemoteConfigProviderImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9491EED31EECC8D2F26690 /* RemoteConfigProviderImpl.swift */; };
 		9757A9E94718FC537168C843 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AD6C2132FF15FB0B38F6B0 /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C9491EED31EECC8D2F26690 /* RemoteConfigProviderImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteConfigProviderImpl.swift; sourceTree = "<group>"; };
 		97DED1CF0258E0DEAC274811 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		AC2B7998FF9C9566ED30E2DE /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,6 +91,7 @@
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 				318039E42DDEAA9E00D0E47F /* GoogleService-Info.plist */,
+				7C9491EED31EECC8D2F26690 /* RemoteConfigProviderImpl.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				31B8600D2E28A3C300599206 /* CrashlyticsLoggerImpl.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				7C94940288C52B56A647A896 /* RemoteConfigProviderImpl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
