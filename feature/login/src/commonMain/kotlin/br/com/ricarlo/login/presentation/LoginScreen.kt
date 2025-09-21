@@ -78,6 +78,7 @@ import br.com.ricarlo.designsystem.generated.resources.Res as DesignSystemRes
 @Composable
 fun LoginScreen(
     navController: NavController,
+    id: String? = null,
     modifier: Modifier = Modifier,
 ) {
     val factory = rememberPermissionsControllerFactory()

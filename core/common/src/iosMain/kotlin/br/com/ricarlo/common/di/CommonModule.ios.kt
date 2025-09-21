@@ -8,9 +8,9 @@ import org.koin.dsl.module
 internal actual fun Module.includeModule() = Unit
 
 fun createIosModule(
-    reporter: CrashlyticsLogger,
-    remoteConfigProvider: RemoteConfigProvider
+    crashlytics: CrashlyticsLogger,
+    remoteConfig: RemoteConfigProvider
 ) = module {
-    single<CrashlyticsLogger> { reporter }
-    single<RemoteConfigProvider> { remoteConfigProvider }
+    single<CrashlyticsLogger> { crashlytics }
+    single<RemoteConfigProvider> { remoteConfig }
 }

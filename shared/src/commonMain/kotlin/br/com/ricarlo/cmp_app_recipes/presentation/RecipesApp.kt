@@ -15,7 +15,6 @@ import androidx.savedstate.read
 import br.com.ricarlo.designsystem.MyApplicationTheme
 import br.com.ricarlo.home.presentation.HomeScreen
 import br.com.ricarlo.login.presentation.LoginScreen
-import br.com.ricarlo.network.utils.logger
 import br.com.ricarlo.shared.BuildConfig
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -61,10 +60,10 @@ fun RecipesApp() {
                     )
                 ) { backStackEntry ->
                     val id = backStackEntry.arguments?.read { getStringOrNull("id") }
-                    logger.debug { "ID: $id" }
 
                     LoginScreen(
-                        navController = navController
+                        navController = navController,
+                        id = id
                     )
                 }
             }

@@ -16,7 +16,6 @@ kotlin {
         commonMain.dependencies {
             api(libs.bundles.ktor.core)
             implementation(libs.kotlinx.coroutines.core)
-            api(libs.kotlin.logging)
             implementation(libs.koin.core)
         }
         iosMain.dependencies {
