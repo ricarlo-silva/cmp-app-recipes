@@ -39,7 +39,7 @@ internal class CrashlyticsProviderImpl(
                 is Int -> crashlytics.setCustomKey(key, value)
                 is Long -> crashlytics.setCustomKey(key, value)
                 is String -> crashlytics.setCustomKey(key, value)
-                else -> crashlytics.setCustomKey(key, value.toString())
+                else -> crashlytics.log("Error setting custom key $key with value $value")
             }
         }
     }

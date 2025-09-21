@@ -44,7 +44,7 @@ internal class RemoteConfigProviderImpl: RemoteConfigProvider {
         return remoteConfig
     }()
 
-    private lazy var crashlytics: CrashlyticsLogger = injectLazy()()
+    private lazy var crashlytics: CrashlyticsProvider = injectLazy()()
 
     func fetchAndActivate() {
         Task {
