@@ -1,6 +1,6 @@
 package br.com.ricarlo.common
 
-interface CrashlyticsLogger {
+interface CrashlyticsProvider {
     fun log(message: String)
     fun recordException(throwable: Throwable)
     fun setUserId(userId: String)

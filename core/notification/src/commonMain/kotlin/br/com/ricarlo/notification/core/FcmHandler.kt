@@ -1,6 +1,6 @@
 package br.com.ricarlo.notification.core
 
-import br.com.ricarlo.common.CrashlyticsLogger
+import br.com.ricarlo.common.CrashlyticsProvider
 import br.com.ricarlo.common.IDeepLinkHandler
 import br.com.ricarlo.notification.data.remote.IApiNotification
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -20,7 +20,7 @@ interface IFcmHandler {
 internal class FcmHandler(
     private val apiNotification: IApiNotification,
     private val deepLinkHandler: IDeepLinkHandler,
-    private val crashlytics: CrashlyticsLogger,
+    private val crashlytics: CrashlyticsProvider,
     private val scope: CoroutineScope
 ) : IFcmHandler {
 
