@@ -15,7 +15,7 @@ import kotlinx.coroutines.tasks.await
 private const val FETCH_INTERVAL = 3600L
 
 internal class RemoteConfigProviderImpl(
-    private val crashlytics: CrashlyticsLogger,
+    private val crashlytics: CrashlyticsProvider,
     private val scope: CoroutineScope
 ) : RemoteConfigProvider {
 

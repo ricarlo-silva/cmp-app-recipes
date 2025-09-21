@@ -8,7 +8,7 @@
 import FirebaseCrashlytics
 import shared
 
-internal class CrashlyticsLoggerImpl: NSObject, CrashlyticsLogger {
+internal class CrashlyticsProviderImpl: NSObject, CrashlyticsProvider {
 
     private lazy var crashlytics: Crashlytics = {
         Crashlytics.crashlytics()

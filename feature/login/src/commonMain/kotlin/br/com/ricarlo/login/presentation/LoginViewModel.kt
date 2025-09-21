@@ -3,7 +3,7 @@ package br.com.ricarlo.login.presentation
 import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.ricarlo.common.CrashlyticsLogger
+import br.com.ricarlo.common.CrashlyticsProvider
 import br.com.ricarlo.common.RemoteConfigKey
 import br.com.ricarlo.common.RemoteConfigProvider
 import br.com.ricarlo.login.BuildConfig
@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 internal class LoginViewModel(
     val permissionsController: PermissionsController,
     private val authRepository: AuthRepository,
-    private val crashlyticsLogger: CrashlyticsLogger,
+    private val crashlytics: CrashlyticsProvider,
     private val remoteConfig: RemoteConfigProvider
 ) : ViewModel() {
     private val _state = MutableStateFlow(LoginState())
@@ -34,7 +34,7 @@ internal class LoginViewModel(
 
     init {
         requestPermission(Permission.REMOTE_NOTIFICATION)
-        crashlyticsLogger.setCustomKey(key = "FLAVOR", value = BuildConfig.FLAVOR)
+        crashlytics.setCustomKey(key = "FLAVOR", value = BuildConfig.FLAVOR)
 
         val welcomeMessage = remoteConfig.getString(RemoteConfigKey.WELCOME_MESSAGE.key)
         val googleLoginEnabled = remoteConfig.getBoolean(RemoteConfigKey.GOOGLE_LOGIN_ENABLED.key)
@@ -78,7 +78,7 @@ internal class LoginViewModel(
                     username = state.value.username,
                     password = state.value.password
                 )
-                crashlyticsLogger.setUserId(userId = state.value.username)
+                crashlytics.setUserId(userId = state.value.username)
             }.onSuccess {
                 _state.update { it.loading(false) }
                 _sideEffect.emit(LoginSideEffect.Navigate(route = "home"))

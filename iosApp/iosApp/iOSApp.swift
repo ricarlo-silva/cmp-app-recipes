@@ -9,7 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private lazy var fcmHandler: IFcmHandler = injectLazy()()
     private lazy var deepLinkHandler: IDeepLinkHandler = injectLazy()()
-    private lazy var crashlytics: CrashlyticsLogger = injectLazy()()
+    private lazy var crashlytics: CrashlyticsProvider = injectLazy()()
     private lazy var remoteConfig: RemoteConfigProvider = injectLazy()()
 
     private let gcmMessageIDKey = "gcm.message_id"
@@ -240,8 +240,8 @@ struct iOSApp: App {
     init() {
         InitKoinKt.doInitKoin(
             includeModule: CommonModule_iosKt.createIosModule(
-                reporter: CrashlyticsLoggerImpl(),
-                remoteConfigProvider: RemoteConfigProviderImpl()
+                crashlytics: CrashlyticsProviderImpl(),
+                remoteConfig: RemoteConfigProviderImpl()
             ),
             config: nil
         )
