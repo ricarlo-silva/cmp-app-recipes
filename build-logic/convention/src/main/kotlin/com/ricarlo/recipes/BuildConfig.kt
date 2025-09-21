@@ -42,6 +42,7 @@ internal fun Project.configureBuildConfig(
                 }
                 appendLine("    const val $key = $value")
             }
+            appendLine("    const val isUAT = ${env == Env.UAT.name}")
             appendLine("}")
         }
     )

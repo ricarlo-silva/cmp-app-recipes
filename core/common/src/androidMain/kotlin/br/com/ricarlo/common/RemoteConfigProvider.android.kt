@@ -8,16 +8,17 @@ import kotlinx.coroutines.tasks.await
 
 internal class RemoteConfigProviderImpl(
     private val remoteConfig: FirebaseRemoteConfig,
-    scope: CoroutineScope
+    private val scope: CoroutineScope
 ) : RemoteConfigProvider {
+
     init {
-        scope.launch {
-            fetchAndActivate()
-        }
+        fetchAndActivate()
     }
 
-    override suspend fun fetchAndActivate() {
-        remoteConfig.fetchAndActivate().await()
+    override fun fetchAndActivate() {
+        scope.launch {
+            remoteConfig.fetchAndActivate().await()
+        }
     }
 
     override fun getString(key: String): String = remoteConfig.getString(key)
@@ -26,15 +27,19 @@ internal class RemoteConfigProviderImpl(
     override fun getDouble(key: String): Double = remoteConfig.getDouble(key)
     override fun getFloat(key: String): Float = remoteConfig.getDouble(key).toFloat()
 
-    override suspend fun setCustomSignals(customSignals: Map<String, Any>) {
-        remoteConfig.setCustomSignals(CustomSignals.Builder().apply {
-            customSignals.forEach { (key, value) ->
-                when (value) {
-                    is String -> put(key, value)
-                    is Long -> put(key, value)
-                    is Double -> put(key, value)
+    override fun setCustomSignals(customSignals: Map<String, Any>) {
+        scope.launch {
+            remoteConfig.setCustomSignals(CustomSignals.Builder().apply {
+                customSignals.forEach { (key, value) ->
+                    when (value) {
+                        is String -> put(key, value)
+                        is Long -> put(key, value)
+                        is Double -> put(key, value)
+                        is Int -> put(key, value.toLong())
+                        is Float -> put(key, value.toDouble())
+                    }
                 }
-            }
-        }.build()).await()
+            }.build()).await()
+        }
     }
 }

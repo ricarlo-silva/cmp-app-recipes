@@ -8,25 +8,34 @@ import shared
 
 internal class RemoteConfigProviderImpl: RemoteConfigProvider {
 
+    private let FETCH_INTERVAL = 3600
+
     private lazy var remoteConfig: RemoteConfig = {
         let remoteConfig = RemoteConfig.remoteConfig()
         let settings = RemoteConfigSettings()
-        settings.minimumFetchInterval = 0
+        #if DEBUG
+            settings.minimumFetchInterval = 0
+        #else
+            settings.minimumFetchInterval = FETCH_INTERVAL
+        #endif
         remoteConfig.configSettings = settings
-        let defaults = RemoteConfigKey.companion.defaultConfig() as? [String: NSObject]
+        let defaults =
+            RemoteConfigKey.companion.defaultConfig() as? [String: NSObject]
         remoteConfig.setDefaults(defaults)
         remoteConfig.addOnConfigUpdateListener { configUpdate, error in
             guard let configUpdate, error == nil else {
-                return print(
-                    "Error listening for config updates: \(String(describing: error))"
+                return self.crashlytics.log(
+                    message:
+                        "Error listening for config updates: \(String(describing: error))"
                 )
             }
 
             if !configUpdate.updatedKeys.isEmpty {
                 self.remoteConfig.activate { changed, error in
                     guard error == nil else {
-                        return print(
-                            "Error activate config: \(String(describing: error))"
+                        return self.crashlytics.log(
+                            message:
+                                "Error activate config: \(String(describing:error))"
                         )
                     }
                 }
@@ -35,8 +44,19 @@ internal class RemoteConfigProviderImpl: RemoteConfigProvider {
         return remoteConfig
     }()
 
-    func fetchAndActivate() async {
-        try? await remoteConfig.fetchAndActivate()
+    private lazy var crashlytics: CrashlyticsLogger = injectLazy()()
+
+    func fetchAndActivate() {
+        Task {
+            do {
+                try await remoteConfig.fetchAndActivate()
+            } catch {
+                crashlytics.log(
+                    message:
+                        "Error fetching remote config: \(error.localizedDescription)"
+                )
+            }
+        }
     }
 
     func getString(key: String) -> String {
@@ -59,21 +79,32 @@ internal class RemoteConfigProviderImpl: RemoteConfigProvider {
         return remoteConfig[key].numberValue.floatValue
     }
 
-    func setCustomSignals(customSignals: [String: Any]) async {
-        var custom: [String: CustomSignalValue?] = [:]
+    func setCustomSignals(customSignals: [String: Any]) {
+        Task {
+            var custom: [String: CustomSignalValue?] = [:]
 
-        for (key, value) in customSignals {
-            switch value {
-            case let str as String:
-                custom[key] = .string(str)
-            case let int as Int:
-                custom[key] = .integer(int)
-            case let dbl as Double:
-                custom[key] = .double(dbl)
-            default: continue
+            for (key, value) in customSignals {
+                switch value {
+                case let str as String:
+                    custom[key] = .string(str)
+                case let int as Int:
+                    custom[key] = .integer(int)
+                case let dbl as Double:
+                    custom[key] = .double(dbl)
+                case let flt as Float:
+                    custom[key] = .double(Double(flt))
+                default: continue
+                }
+            }
+
+            do {
+                try await remoteConfig.setCustomSignals(custom)
+            } catch {
+                crashlytics.log(
+                    message:
+                        "Failed to setCustomSignals: \(error.localizedDescription)"
+                )
             }
         }
-
-        try? await remoteConfig.setCustomSignals(custom)
     }
 }

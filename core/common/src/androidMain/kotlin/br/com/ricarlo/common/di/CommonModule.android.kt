@@ -1,5 +1,6 @@
 package br.com.ricarlo.common.di
 
+import br.com.ricarlo.common.BuildConfig
 import br.com.ricarlo.common.CrashlyticsLogger
 import br.com.ricarlo.common.CrashlyticsLoggerImpl
 import br.com.ricarlo.common.RemoteConfigKey
@@ -17,6 +18,8 @@ import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 
+private const val FETCH_INTERVAL = 3600L
+
 internal actual fun Module.includeModule() {
     singleOf(::CrashlyticsLoggerImpl) bind CrashlyticsLogger::class
     single { FirebaseCrashlytics.getInstance() }
@@ -24,7 +27,7 @@ internal actual fun Module.includeModule() {
     single<FirebaseRemoteConfig> {
         Firebase.remoteConfig.apply {
             setConfigSettingsAsync(remoteConfigSettings {
-                minimumFetchIntervalInSeconds = 0
+                minimumFetchIntervalInSeconds = if (BuildConfig.isUAT) 0 else FETCH_INTERVAL
             })
 
             setDefaultsAsync(RemoteConfigKey.defaultConfig())
