@@ -67,6 +67,9 @@ internal class RemoteConfigProviderImpl(
                         is Double -> put(key, value)
                         is Int -> put(key, value.toLong())
                         is Float -> put(key, value.toDouble())
+                        else -> crashlytics.recordException(
+                            IllegalArgumentException("Unsupported type: ${value.javaClass.name}")
+                        )
                     }
                 }
             }.build()).await()

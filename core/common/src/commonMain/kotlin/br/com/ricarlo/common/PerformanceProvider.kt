@@ -1,5 +1,6 @@
 package br.com.ricarlo.common
 
 interface PerformanceProvider {
-    fun trace(name: String, action: () -> Unit)
+    fun <T> trace(name: String, action: () -> T) : T
+    fun setPerformanceCollectionEnabled(enabled: Boolean)
 }
