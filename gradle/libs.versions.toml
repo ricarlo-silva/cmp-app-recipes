@@ -26,6 +26,7 @@ firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx"
 firebase-messaging-ktx = { module = "com.google.firebase:firebase-messaging-ktx" }
 firebase-crashlytics-ktx = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-config-ktx = { module = "com.google.firebase:firebase-config-ktx" }
+firebase-perf = { module = "com.google.firebase:firebase-perf" }
 
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
@@ -67,6 +68,7 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 google-services = { id = "com.google.gms.google-services", version = "4.4.3" }
 modulegraph = { id = "dev.iurysouza.modulegraph", version = "0.12.1" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.6" }
+firebase-perf = { id = "com.google.firebase.firebase-perf", version = "2.0.1" }
 
 #
 recipes-convention-publish = { id = "recipes.convention.publish", version = "unspecified" }

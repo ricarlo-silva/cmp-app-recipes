@@ -16,6 +16,7 @@ kotlin {
             implementation(project.dependencies.platform(libs.firebase.bom))
             implementation(libs.firebase.crashlytics.ktx)
             implementation(libs.firebase.config.ktx)
+            implementation(libs.firebase.perf)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
