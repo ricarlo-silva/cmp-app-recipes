@@ -241,7 +241,8 @@ struct iOSApp: App {
         InitKoinKt.doInitKoin(
             includeModule: CommonModule_iosKt.createIosModule(
                 crashlytics: CrashlyticsProviderImpl(),
-                remoteConfig: RemoteConfigProviderImpl()
+                remoteConfig: RemoteConfigProviderImpl(),
+                performance: PerformanceProviderImpl()
             ),
             config: nil
         )

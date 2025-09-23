@@ -4,6 +4,7 @@ import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.ricarlo.common.CrashlyticsProvider
+import br.com.ricarlo.common.PerformanceProvider
 import br.com.ricarlo.common.RemoteConfigKey
 import br.com.ricarlo.common.RemoteConfigProvider
 import br.com.ricarlo.login.BuildConfig
@@ -24,7 +25,8 @@ internal class LoginViewModel(
     val permissionsController: PermissionsController,
     private val authRepository: AuthRepository,
     private val crashlytics: CrashlyticsProvider,
-    private val remoteConfig: RemoteConfigProvider
+    private val remoteConfig: RemoteConfigProvider,
+    private val performance: PerformanceProvider
 ) : ViewModel() {
     private val _state = MutableStateFlow(LoginState())
     val state = _state.asStateFlow()
@@ -33,16 +35,20 @@ internal class LoginViewModel(
     val sideEffect = _sideEffect.asSharedFlow()
 
     init {
-        requestPermission(Permission.REMOTE_NOTIFICATION)
-        crashlytics.setCustomKey(key = "FLAVOR", value = BuildConfig.FLAVOR)
+        performance.trace("login_init") {
+            requestPermission(Permission.REMOTE_NOTIFICATION)
+            crashlytics.setCustomKey(key = "FLAVOR", value = BuildConfig.FLAVOR)
 
-        val welcomeMessage = remoteConfig.getString(RemoteConfigKey.WELCOME_MESSAGE.key)
-        val googleLoginEnabled = remoteConfig.getBoolean(RemoteConfigKey.GOOGLE_LOGIN_ENABLED.key)
-        _state.update {
-            it.copy(
-                welcomeMessage = welcomeMessage,
-                googleLoginEnabled = googleLoginEnabled
+            val welcomeMessage = remoteConfig.getString(RemoteConfigKey.WELCOME_MESSAGE.key)
+            val googleLoginEnabled = remoteConfig.getBoolean(
+                RemoteConfigKey.GOOGLE_LOGIN_ENABLED.key
             )
+            _state.update {
+                it.copy(
+                    welcomeMessage = welcomeMessage,
+                    googleLoginEnabled = googleLoginEnabled
+                )
+            }
         }
     }
 
