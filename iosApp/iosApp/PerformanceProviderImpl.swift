@@ -2,24 +2,28 @@
 //  Created by Ricarlo Silva on 22/09/25.
 //  Copyright © 2025 orgName. All rights reserved.
 //
+import FirebasePerformance
 import shared
 
-class PerformanceProviderImpl {
-    // private lazy var performance: FirebasePerformance = {
-    //     FirebasePerformance.getInstance()
-    // }()
+internal class PerformanceProviderImpl: PerformanceProvider {
 
-    func trace<T>(_ name: String, action: () -> T) -> T {
-    //     // if (!performance.isPerformanceCollectionEnabled) {
-    //     //     return action()
-    //     // }
-    //     // return performance.newTrace(name).trace {
-    //     //     action()
-    //     // }
-        return action()
+    private lazy var performance: Performance = {
+        Performance.sharedInstance()
+    }()
+
+    func trace(name: String, action: @escaping () -> Any?) -> Any? {
+        if !performance.isDataCollectionEnabled {
+            return action()
+        }
+        guard let trace = Performance.startTrace(name: name) else {
+            return action()
+        }
+        let result = action()
+        trace.stop()
+        return result
     }
 
     func setPerformanceCollectionEnabled(enabled: Bool) {
-        // performance.isPerformanceCollectionEnabled = enabled
+        performance.isDataCollectionEnabled = enabled
     }
 }
