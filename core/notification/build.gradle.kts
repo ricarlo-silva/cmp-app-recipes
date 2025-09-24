@@ -11,8 +11,8 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(project.dependencies.platform(libs.firebase.bom))
-            implementation(libs.firebase.messaging.ktx)
-            implementation(libs.firebase.analytics.ktx)
+            implementation(libs.firebase.messaging)
+            implementation(libs.firebase.analytics)
         }
         commonMain.dependencies {
             implementation(projects.core.common)

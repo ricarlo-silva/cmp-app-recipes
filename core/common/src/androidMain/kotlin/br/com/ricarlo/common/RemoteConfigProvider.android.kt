@@ -1,13 +1,14 @@
 package br.com.ricarlo.common
 
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.Firebase
+import com.google.firebase.FirebaseException
 import com.google.firebase.remoteconfig.ConfigUpdate
 import com.google.firebase.remoteconfig.ConfigUpdateListener
 import com.google.firebase.remoteconfig.CustomSignals
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigException
-import com.google.firebase.remoteconfig.ktx.remoteConfig
-import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
+import com.google.firebase.remoteconfig.remoteConfig
+import com.google.firebase.remoteconfig.remoteConfigSettings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -35,7 +36,7 @@ internal class RemoteConfigProviderImpl(
                 }
 
                 override fun onError(p0: FirebaseRemoteConfigException) {
-                    crashlytics.log("Error listening for config updates: ${p0.message}")
+                    crashlytics.recordException(FirebaseException("Error listening for config updates: ${p0.message}"))
                 }
             })
         }
@@ -68,7 +69,7 @@ internal class RemoteConfigProviderImpl(
                         is Int -> put(key, value.toLong())
                         is Float -> put(key, value.toDouble())
                         else -> crashlytics.recordException(
-                            IllegalArgumentException("Unsupported type: ${value.javaClass.name}")
+                            IllegalArgumentException("Unsupported type: ${value.javaClass.name} for key $key with value $value")
                         )
                     }
                 }

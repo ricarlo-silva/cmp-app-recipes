@@ -24,18 +24,22 @@ internal class RemoteConfigProviderImpl: RemoteConfigProvider {
         remoteConfig.setDefaults(defaults)
         remoteConfig.addOnConfigUpdateListener { configUpdate, error in
             guard let configUpdate, error == nil else {
-                return self.crashlytics.log(
-                    message:
-                        "Error listening for config updates: \(String(describing: error))"
+                return self.crashlytics.recordException(
+                    throwable: KotlinThrowable(
+                        message:
+                            "Error listening for config updates: \(String(describing: error))"
+                    )
                 )
             }
 
             if !configUpdate.updatedKeys.isEmpty {
                 self.remoteConfig.activate { changed, error in
                     guard error == nil else {
-                        return self.crashlytics.log(
-                            message:
-                                "Error activate config: \(String(describing:error))"
+                        return self.crashlytics.recordException(
+                            throwable: KotlinThrowable(
+                                message:
+                                    "Error activate config: \(String(describing:error))"
+                            )
                         )
                     }
                 }
@@ -51,9 +55,11 @@ internal class RemoteConfigProviderImpl: RemoteConfigProvider {
             do {
                 try await remoteConfig.fetchAndActivate()
             } catch {
-                crashlytics.log(
-                    message:
-                        "Error fetching remote config: \(error.localizedDescription)"
+                crashlytics.recordException(
+                    throwable: KotlinThrowable(
+                        message:
+                            "Error fetching remote config: \(error.localizedDescription)"
+                    )
                 )
             }
         }
@@ -93,16 +99,23 @@ internal class RemoteConfigProviderImpl: RemoteConfigProvider {
                     custom[key] = .double(dbl)
                 case let flt as Float:
                     custom[key] = .double(Double(flt))
-                default: continue
+                default:
+                    crashlytics.recordException(
+                        throwable: KotlinThrowable(
+                            message: "Unsupported custom signal type for key \(key) with value \(value)"
+                        )
+                    )
                 }
             }
 
             do {
                 try await remoteConfig.setCustomSignals(custom)
             } catch {
-                crashlytics.log(
-                    message:
-                        "Failed to setCustomSignals: \(error.localizedDescription)"
+                crashlytics.recordException(
+                    throwable: KotlinThrowable(
+                        message:
+                            "Failed to setCustomSignals: \(error.localizedDescription)"
+                    )
                 )
             }
         }

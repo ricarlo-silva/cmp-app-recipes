@@ -1,7 +1,4 @@
 //
-//  CrashlyticsLoggerImpl.swift
-//  iosApp
-//
 //  Created by Ricarlo Silva on 17/07/25.
 //  Copyright © 2025 orgName. All rights reserved.
 //
