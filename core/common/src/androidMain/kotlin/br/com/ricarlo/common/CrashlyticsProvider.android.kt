@@ -41,7 +41,7 @@ internal class CrashlyticsProviderImpl(
                 is String -> crashlytics.setCustomKey(key, value)
                 else -> crashlytics.recordException(
                     IllegalArgumentException(
-                        "Unsupported type: ${value.javaClass.name} setting custom key $key with value $value"
+                        "Unsupported type: ${value.javaClass.name} for key $key with value $value"
                     )
                 )
             }

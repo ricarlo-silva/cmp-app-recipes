@@ -1,6 +1,7 @@
 package br.com.ricarlo.common
 
 import com.google.firebase.Firebase
+import com.google.firebase.FirebaseException
 import com.google.firebase.remoteconfig.ConfigUpdate
 import com.google.firebase.remoteconfig.ConfigUpdateListener
 import com.google.firebase.remoteconfig.CustomSignals
@@ -35,7 +36,7 @@ internal class RemoteConfigProviderImpl(
                 }
 
                 override fun onError(p0: FirebaseRemoteConfigException) {
-                    crashlytics.log("Error listening for config updates: ${p0.message}")
+                    crashlytics.recordException(FirebaseException("Error listening for config updates: ${p0.message}"))
                 }
             })
         }
@@ -68,7 +69,7 @@ internal class RemoteConfigProviderImpl(
                         is Int -> put(key, value.toLong())
                         is Float -> put(key, value.toDouble())
                         else -> crashlytics.recordException(
-                            IllegalArgumentException("Unsupported type: ${value.javaClass.name} setting custom key $key with value $value")
+                            IllegalArgumentException("Unsupported type: ${value.javaClass.name} for key $key with value $value")
                         )
                     }
                 }
