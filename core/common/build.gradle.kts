@@ -14,8 +14,8 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(project.dependencies.platform(libs.firebase.bom))
-            implementation(libs.firebase.crashlytics.ktx)
-            implementation(libs.firebase.config.ktx)
+            implementation(libs.firebase.crashlytics)
+            implementation(libs.firebase.config)
             implementation(libs.firebase.perf)
         }
         commonMain.dependencies {

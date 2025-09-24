@@ -21,11 +21,11 @@ compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = 
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junit" }
 
-firebase-bom = { module = "com.google.firebase:firebase-bom", version = "33.16.0" }
-firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx" }
-firebase-messaging-ktx = { module = "com.google.firebase:firebase-messaging-ktx" }
-firebase-crashlytics-ktx = { module = "com.google.firebase:firebase-crashlytics-ktx" }
-firebase-config-ktx = { module = "com.google.firebase:firebase-config-ktx" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version = "34.3.0" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+firebase-config = { module = "com.google.firebase:firebase-config" }
 firebase-perf = { module = "com.google.firebase:firebase-perf" }
 
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
