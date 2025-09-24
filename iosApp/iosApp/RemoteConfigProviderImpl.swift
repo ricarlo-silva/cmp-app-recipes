@@ -102,7 +102,7 @@ internal class RemoteConfigProviderImpl: RemoteConfigProvider {
                 default:
                     crashlytics.recordException(
                         throwable: KotlinThrowable(
-                            message: "Unhandled custom signal type"
+                            message: "Unhandled custom signal type for key \(key): \(value.class)"
                         )
                     )
                 }
