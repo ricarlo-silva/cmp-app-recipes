@@ -27,7 +27,7 @@ class AnalysisConventionPlugin : Plugin<Project> {
 internal fun Project.configureDetekt() = configure<DetektExtension> {
 
     toolVersion = libs.findVersion("detekt").get().requiredVersion
-    config.setFrom(file("configg/detekt/detekt.yml"))
+    config.setFrom(file("config/detekt/detekt.yml"))
     buildUponDefaultConfig = true
 
     tasks.withType<Detekt>().configureEach {

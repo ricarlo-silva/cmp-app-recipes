@@ -3,9 +3,9 @@ package br.com.ricarlo.analysis.detekt
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.rules.KotlinCoreEnvironmentTest
 import io.gitlab.arturbosch.detekt.test.compileAndLintWithContext
+import kotlin.test.assertEquals
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
 
 @KotlinCoreEnvironmentTest
 internal class MyRuleTest(private val env: KotlinCoreEnvironment) {

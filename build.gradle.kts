@@ -18,7 +18,6 @@ plugins {
     alias(libs.plugins.spotless).apply(true)
     alias(libs.plugins.detekt).apply(true)
     alias(libs.plugins.kotlin.jvm).apply(false)
-//    alias(libs.plugins.recipes.convention.analysis).apply(true)
 }
 
 moduleGraphConfig {
@@ -40,7 +39,7 @@ subprojects {
                 .setEditorConfigPath(rootProject.file(".editorconfig").path)
             toggleOffOn() // Allow toggling Spotless off and on within code files using comments
             trimTrailingWhitespace()
-            ktfmt(libs.versions.ktfmt.get()).kotlinlangStyle()
+//            ktfmt(libs.versions.ktfmt.get()).kotlinlangStyle()
         }
 
         // Additional configuration for Kotlin Gradle scripts
