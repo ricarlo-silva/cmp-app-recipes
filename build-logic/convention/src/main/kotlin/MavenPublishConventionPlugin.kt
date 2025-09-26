@@ -4,7 +4,7 @@ import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.internal.extensions.stdlib.capitalized
 
-class MavenPublishConventionPlugin : Plugin<Project> {
+internal class MavenPublishConventionPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         with(project) {
@@ -13,14 +13,14 @@ class MavenPublishConventionPlugin : Plugin<Project> {
             }
 
             version = rootProject.file("./config/VERSION_NAME").readText().trim()
-            group = "com.ricarlo"
+            group = "br.com.ricarlo"
 
             extensions.getByType(PublishingExtension::class.java).apply {
                 publications.withType(MavenPublication::class.java).all {
                     pom {
                         name.set("${project.name.capitalized()} - CMP library")
                         description.set("${project.name.capitalized()} - Compose Multiplatform library")
-                        url.set("https://github.com/ricarlo-silva/kmp-app-recipes")
+                        url.set("https://github.com/ricarlo-silva/cmp-app-recipes")
 
                         licenses {
                             license {
@@ -41,7 +41,7 @@ class MavenPublishConventionPlugin : Plugin<Project> {
                 repositories {
                     maven {
                         name = "GitHubPackages"
-                        url = uri("https://maven.pkg.github.com/ricarlo-silva/kmp-app-recipes")
+                        url = uri("https://maven.pkg.github.com/ricarlo-silva/cmp-app-recipes")
                         credentials {
                             username = System.getenv("GITHUB_ACTOR")
                             password = System.getenv("GITHUB_TOKEN")

@@ -1,8 +1,17 @@
 package br.com.ricarlo.network
 
-// TODO: Load tokens from a local storage
-class TokenManager {
-    fun getToken(): String = "abc123"
+interface TokenManager {
+    fun getToken(): String
+    fun getRefreshToken(): String
+}
 
-    fun getRefreshToken(): String = "xyz111"
+// TODO: Load tokens from a local storage
+internal class TokenManagerImpl : TokenManager {
+    override fun getToken(): String {
+        return BuildConfig.API_KEY
+    }
+
+    override fun getRefreshToken(): String {
+        return "xyz111"
+    }
 }

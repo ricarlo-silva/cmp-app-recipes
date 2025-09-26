@@ -10,7 +10,12 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		316CA3BC2E810785004F42FA /* PerformanceProviderImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316CA3BB2E810763004F42FA /* PerformanceProviderImpl.swift */; };
+		318039E52DDEAA9E00D0E47F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 318039E42DDEAA9E00D0E47F /* GoogleService-Info.plist */; };
+		318039E72DE026FF00D0E47F /* KoinHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318039E62DE026FC00D0E47F /* KoinHelpers.swift */; };
+		31B8600D2E28A3C300599206 /* CrashlyticsProviderImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B8600C2E28A3BE00599206 /* CrashlyticsProviderImpl.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		7C94940288C52B56A647A896 /* RemoteConfigProviderImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9491EED31EECC8D2F26690 /* RemoteConfigProviderImpl.swift */; };
 		9757A9E94718FC537168C843 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AD6C2132FF15FB0B38F6B0 /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -19,9 +24,14 @@
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		24AD6C2132FF15FB0B38F6B0 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		316CA3BB2E810763004F42FA /* PerformanceProviderImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceProviderImpl.swift; sourceTree = "<group>"; };
+		318039E42DDEAA9E00D0E47F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		318039E62DE026FC00D0E47F /* KoinHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoinHelpers.swift; sourceTree = "<group>"; };
+		31B8600C2E28A3BE00599206 /* CrashlyticsProviderImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashlyticsProviderImpl.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C9491EED31EECC8D2F26690 /* RemoteConfigProviderImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteConfigProviderImpl.swift; sourceTree = "<group>"; };
 		97DED1CF0258E0DEAC274811 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		AC2B7998FF9C9566ED30E2DE /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,11 +85,16 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				316CA3BB2E810763004F42FA /* PerformanceProviderImpl.swift */,
+				31B8600C2E28A3BE00599206 /* CrashlyticsProviderImpl.swift */,
+				318039E62DE026FC00D0E47F /* KoinHelpers.swift */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
+				318039E42DDEAA9E00D0E47F /* GoogleService-Info.plist */,
+				7C9491EED31EECC8D2F26690 /* RemoteConfigProviderImpl.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -105,6 +120,9 @@
 				7555FF79242A565900829871 /* Resources */,
 				538A5EACDCB78535FB64FA0C /* Frameworks */,
 				3D08C70852322BCFF2271F57 /* [CP] Copy Pods Resources */,
+				7C8B270278C7F418102FF38C /* [CP] Embed Pods Frameworks */,
+				3160D8582E25DF36003800F2 /* ShellScript */,
+				3160D8592E25E773003800F2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -155,12 +173,49 @@
 			files = (
 				058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */,
 				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
+				318039E52DDEAA9E00D0E47F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3160D8582E25DF36003800F2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}\n",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		3160D8592E25E773003800F2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/FirebaseCrashlytics/upload-symbols -gsp ${PROJECT_DIR}/iosApp/GoogleService-Info.plist -p ios ${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\n\n";
+		};
 		3D08C70852322BCFF2271F57 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -200,6 +255,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7C8B270278C7F418102FF38C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -207,8 +279,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				318039E72DE026FF00D0E47F /* KoinHelpers.swift in Sources */,
+				316CA3BC2E810785004F42FA /* PerformanceProviderImpl.swift in Sources */,
+				31B8600D2E28A3C300599206 /* CrashlyticsProviderImpl.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				7C94940288C52B56A647A896 /* RemoteConfigProviderImpl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,7 +423,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.com.project.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.ricarlo.recipes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -370,7 +446,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.com.project.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.ricarlo.recipes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

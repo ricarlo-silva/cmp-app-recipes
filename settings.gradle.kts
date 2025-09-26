@@ -27,10 +27,13 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "kmp-app-recipes"
+rootProject.name = "cmp-app-recipes"
 include(":androidApp")
 include(":shared")
 include(":core:designsystem")
 include(":core:network")
 include(":feature:login")
+include(":core:common")
+include(":core:notification")
+include(":feature:home")
 include(":tools:analysis")

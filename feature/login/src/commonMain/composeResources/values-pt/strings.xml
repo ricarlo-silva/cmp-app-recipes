@@ -1,0 +1,14 @@
+<resources>
+    <string name="create_account">Criar nova conta</string>
+    <string name="forgot_password">Esqueci minha senha</string>
+    <string name="login">Entrar</string>
+    <string name="google_login">Google</string>
+    <string name="no_account"> Ainda não tem cadastro? </string>
+    <string name="other_access"> ou acesse com </string>
+    <string name="password">Senha</string>
+    <string name="username">E-mail</string>
+    <string name="type_email">Digite seu e-mail</string>
+    <string name="type_password">Digite sua senha</string>
+    <string name="hide_password">Ocultar senha</string>
+    <string name="show_password">Mostrar senha</string>
+</resources>

@@ -24,8 +24,14 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: 17
+          java-version: 21
           distribution: temurin
+
+      - name: Create secrets.properties
+        run: |
+          echo "BASE_URL=${{ secrets.BASE_URL }}" > secrets.properties
+          echo "API_KEY=${{ secrets.API_KEY }}" >> secrets.properties
+        working-directory: .
 
       - name: Publish all publications to GitHub Packages repository
         run: ./gradlew publishAllPublicationsToGitHubPackagesRepository
