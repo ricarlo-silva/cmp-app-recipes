@@ -9,6 +9,7 @@ internal class AndroidLibraryPlugin : Plugin<Project> {
     override fun apply(project: Project) = with(project) {
         with(pluginManager) {
             apply(libs.findPlugin("androidLibrary").get().get().pluginId)
+            apply("recipes.convention.analysis")
         }
         extensions.configure<LibraryExtension> {
             namespace = "br.com.ricarlo.$name"
