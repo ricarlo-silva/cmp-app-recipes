@@ -1,4 +1,5 @@
 
+import com.ricarlo.recipes.libs
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
@@ -14,7 +15,6 @@ class AnalysisConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             pluginManager.apply("io.gitlab.arturbosch.detekt")
-//                libs.findLibrary("detekt-gradlePlugin").get().get().group.toString()
             configureDetekt()
 
             dependencies {
@@ -26,15 +26,15 @@ class AnalysisConventionPlugin : Plugin<Project> {
 
 internal fun Project.configureDetekt() = configure<DetektExtension> {
 
-    toolVersion = "1.23.8"
+    toolVersion = libs.findVersion("detekt").get().requiredVersion
     config.setFrom(file("configg/detekt/detekt.yml"))
     buildUponDefaultConfig = true
 
     tasks.withType<Detekt>().configureEach {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_21.toString()
     }
     tasks.withType<DetektCreateBaselineTask>().configureEach {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_21.toString()
     }
     tasks.named<Detekt>("detekt") {
         reports {

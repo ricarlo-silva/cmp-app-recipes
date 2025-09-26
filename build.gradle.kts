@@ -18,8 +18,7 @@ plugins {
     alias(libs.plugins.spotless).apply(true)
     alias(libs.plugins.detekt).apply(true)
     alias(libs.plugins.kotlin.jvm).apply(false)
-//    alias(libs.plugins.recipes.convention.publish).apply(true)
-    alias(libs.plugins.recipes.convention.analysis).apply(true)
+//    alias(libs.plugins.recipes.convention.analysis).apply(true)
 }
 
 moduleGraphConfig {

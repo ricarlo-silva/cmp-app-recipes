@@ -12,7 +12,7 @@ targetSdk = "36"
 ktor = "3.3.0"
 coroutines = "1.10.2"
 koin = "4.1.1"
-androidTools = "31.9.2"
+androidTools = "31.13.0"
 detekt = "1.23.8"
 ktlint = "1.5.0"
 ktfmt = "0.54"
@@ -56,7 +56,6 @@ lint-checks = { group = "com.android.tools.lint", name = "lint-checks", version.
 lint-tests = { group = "com.android.tools.lint", name = "lint-tests", version.ref = "androidTools" }
 detekt-api = { module = "io.gitlab.arturbosch.detekt:detekt-api", version.ref = "detekt" }
 detekt-test = { module = "io.gitlab.arturbosch.detekt:detekt-test", version.ref = "detekt" }
-detekt-gradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 
 [bundles]
 ktor-core = [
@@ -82,11 +81,11 @@ firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.
 firebase-perf = { id = "com.google.firebase.firebase-perf", version = "2.0.1" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-spotless = { id = "com.diffplug.spotless", version = "6.25.0" }
+spotless = { id = "com.diffplug.spotless", version = "8.0.0" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 # Plugins defined by this project
 recipes-convention-publish = { id = "recipes.convention.publish", version = "unspecified" }
 recipes-convention-multiplatform = { id = "recipes.convention.multiplatform", version = "unspecified" }
 recipes-convention-library = { id = "recipes.convention.library", version = "unspecified" }
-recipes-convention-analysis = { id = "recipes.convention.analysis" }
+recipes-convention-analysis = { id = "recipes.convention.analysis", version = "unspecified" }
