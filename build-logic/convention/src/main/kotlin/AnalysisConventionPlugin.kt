@@ -1,4 +1,6 @@
 
+import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.gradle.LibraryExtension
 import com.ricarlo.recipes.libs
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
@@ -14,8 +16,20 @@ import org.gradle.kotlin.dsl.withType
 class AnalysisConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            pluginManager.apply("io.gitlab.arturbosch.detekt")
+            pluginManager.apply(libs.findPlugin("detekt").get().get().pluginId)
             configureDetekt()
+
+            extensions.findByType(ApplicationExtension::class.java)?.apply {
+                lint {
+                    baseline = file("lint-baseline.xml")
+                }
+            }
+
+            extensions.findByType(LibraryExtension::class.java)?.apply {
+                lint {
+                    baseline = file("lint-baseline.xml")
+                }
+            }
 
             dependencies {
 
