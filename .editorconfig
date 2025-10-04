@@ -14,15 +14,16 @@ insert_final_newline = true
 [*.{kt,kts}]
 indent_options = 4
 ktlint_standard = enabled
-ktlint_experimental = enabled
+# ktlint_experimental = enabled
 ktlint_code_style = intellij_idea
-ktlint_standard_comment-spacing = disabled
+# ktlint_standard_comment-spacing = disabled
 ktlint_standard_package-name = disabled
-ktlint_experimental_package-naming = enabled
-ij_kotlin_allow_trailing_comma = true
-ij_kotlin_allow_trailing_comma_on_call_site = true
+ktlint_function_naming_ignore_annotation_pattern = disabled
+# ktlint_experimental_package-naming = enabled
+# ij_kotlin_allow_trailing_comma = true
+# ij_kotlin_allow_trailing_comma_on_call_site = true
 ktlint_standard_backing-property-naming = disabled
-ktlint_function_naming_ignore_when_annotated_with=Composable
+ktlint_function_naming_ignore_when_annotated_with = Composable
 
 
 [*.md]

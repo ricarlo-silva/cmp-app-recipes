@@ -37,9 +37,22 @@ subprojects {
             targetExclude("${layout.buildDirectory}/**/*.kt") // Exclude files in the build directory
             ktlint(libs.versions.ktlint.get())
                 .setEditorConfigPath(rootProject.file(".editorconfig").path)
+//                .editorConfigOverride(
+//                    mapOf(
+//                        "baseline" to "ktlint-baseline.xml"
+//                    )
+//                )
+//                .customRuleSets(
+//                    listOf(
+//                        "io.nlopez.compose.rules:ktlint:0.4.27"
+//                    )
+//                )
             toggleOffOn() // Allow toggling Spotless off and on within code files using comments
             trimTrailingWhitespace()
-//            ktfmt(libs.versions.ktfmt.get()).kotlinlangStyle()
+            endWithNewline()
+//            ktfmt(libs.versions.ktfmt.get())
+////                .googleStyle()
+//                .kotlinlangStyle()
         }
 
         // Additional configuration for Kotlin Gradle scripts
