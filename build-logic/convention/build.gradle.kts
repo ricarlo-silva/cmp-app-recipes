@@ -17,6 +17,7 @@ dependencies {
     compileOnly(libs.plugins.kotlinAndroid.toDep())
     compileOnly(libs.plugins.kotlinMultiplatform.toDep())
     compileOnly(libs.plugins.detekt.toDep())
+    compileOnly(libs.plugins.spotless.toDep())
 }
 
 fun Provider<PluginDependency>.toDep() = map {
