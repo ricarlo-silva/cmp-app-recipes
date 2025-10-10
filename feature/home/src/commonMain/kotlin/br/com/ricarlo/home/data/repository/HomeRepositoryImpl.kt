@@ -6,9 +6,7 @@ import br.com.ricarlo.home.domain.model.Fruit
 import br.com.ricarlo.home.domain.repository.HomeRepository
 
 internal class HomeRepositoryImpl(
-    private val apiHome: ApiHome
+    private val apiHome: ApiHome,
 ) : HomeRepository {
-    override suspend fun getFruits(): List<Fruit> {
-        return apiHome.getFruits().map { it.toFruit() }
-    }
+    override suspend fun getFruits(): List<Fruit> = apiHome.getFruits().map { it.toFruit() }
 }

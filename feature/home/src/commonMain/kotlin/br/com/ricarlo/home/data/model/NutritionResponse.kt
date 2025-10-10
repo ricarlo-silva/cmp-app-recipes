@@ -10,13 +10,14 @@ internal data class NutritionResponse(
     @SerialName("fat") val fat: Double,
     @SerialName("sugar") val sugar: Double,
     @SerialName("carbohydrates") val carbohydrates: Double,
-    @SerialName("protein") val protein: Double
+    @SerialName("protein") val protein: Double,
 )
 
-internal fun NutritionResponse.toNutrition() = Nutrition(
-    calories = calories,
-    fat = fat,
-    sugar = sugar,
-    carbohydrates = carbohydrates,
-    protein = protein
-)
+internal fun NutritionResponse.toNutrition() =
+    Nutrition(
+        calories = calories,
+        fat = fat,
+        sugar = sugar,
+        carbohydrates = carbohydrates,
+        protein = protein,
+    )

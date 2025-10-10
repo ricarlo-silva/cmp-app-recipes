@@ -13,7 +13,9 @@ private const val EVENT_OPEN = "open"
 
 interface IFcmHandler {
     fun onNewToken(token: String)
+
     fun onMessageReceived(remoteMessage: Map<String, Any>)
+
     fun onClickMessage(remoteMessage: Map<String, Any>)
 }
 
@@ -21,12 +23,12 @@ internal class FcmHandler(
     private val apiNotification: IApiNotification,
     private val deepLinkHandler: IDeepLinkHandler,
     private val crashlytics: CrashlyticsProvider,
-    private val scope: CoroutineScope
+    private val scope: CoroutineScope,
 ) : IFcmHandler {
-
-    private val handler = CoroutineExceptionHandler { _, exception ->
-        crashlytics.recordException(exception)
-    }
+    private val handler =
+        CoroutineExceptionHandler { _, exception ->
+            crashlytics.recordException(exception)
+        }
 
     override fun onNewToken(token: String) {
         scope.launch(handler) {

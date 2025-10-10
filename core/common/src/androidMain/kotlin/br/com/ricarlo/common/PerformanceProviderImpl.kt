@@ -4,12 +4,14 @@ import com.google.firebase.perf.FirebasePerformance
 import com.google.firebase.perf.trace
 
 internal class PerformanceProviderImpl : PerformanceProvider {
-
     private val performance: FirebasePerformance by lazy {
         FirebasePerformance.getInstance()
     }
 
-    override fun <T> trace(name: String, action: () -> T): T {
+    override fun <T> trace(
+        name: String,
+        action: () -> T,
+    ): T {
         if (!performance.isPerformanceCollectionEnabled) {
             return action()
         }

@@ -8,7 +8,7 @@ import kotlin.reflect.KClass
 fun <T> koinGet(
     clazz: KClass<*>,
     qualifier: Qualifier? = null,
-    parameters: ParametersDefinition? = null
+    parameters: ParametersDefinition? = null,
 ): T {
     val koin = KoinPlatformTools.defaultContext().get()
     return koin.get(clazz, qualifier, parameters)

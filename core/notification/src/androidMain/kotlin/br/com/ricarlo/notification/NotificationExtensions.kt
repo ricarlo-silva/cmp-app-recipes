@@ -8,40 +8,45 @@ import android.content.Intent
 import androidx.core.content.IntentCompat
 import com.google.firebase.messaging.RemoteMessage
 
-fun Context.createPendingIntent(intent: Intent, requestCode: Int = 0): PendingIntent {
-    return PendingIntent.getActivity(
+fun Context.createPendingIntent(
+    intent: Intent,
+    requestCode: Int = 0,
+): PendingIntent =
+    PendingIntent.getActivity(
         this.applicationContext,
         requestCode,
         intent,
-        flags()
+        flags(),
     )
-}
 
-fun Context.createBroadcastPendingIntent(intent: Intent, requestCode: Int = 0): PendingIntent {
-    return PendingIntent.getBroadcast(
+fun Context.createBroadcastPendingIntent(
+    intent: Intent,
+    requestCode: Int = 0,
+): PendingIntent =
+    PendingIntent.getBroadcast(
         this.applicationContext,
         requestCode,
         intent,
-        flags()
+        flags(),
     )
-}
 
 private fun flags() = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
 
 fun Context.createNotificationChannel(
     id: String,
     name: String,
-    description: String? = null
+    description: String? = null,
 ) {
-    val channel = NotificationChannel(
-        id,
-        name,
-        NotificationManager.IMPORTANCE_DEFAULT
-    ).apply {
-        description?.let {
-            this.description = it
+    val channel =
+        NotificationChannel(
+            id,
+            name,
+            NotificationManager.IMPORTANCE_DEFAULT,
+        ).apply {
+            description?.let {
+                this.description = it
+            }
         }
-    }
     val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     notificationManager.createNotificationChannel(channel)
 }
@@ -67,8 +72,11 @@ fun Context.areNotificationsEnabled(channelId: String? = null): Boolean {
 }
 
 fun Intent.getMessageData(): Map<String, Any> {
-    val message = IntentCompat.getParcelableExtra(
-        this, MESSAGE_KEY, RemoteMessage::class.java
-    )
+    val message =
+        IntentCompat.getParcelableExtra(
+            this,
+            MESSAGE_KEY,
+            RemoteMessage::class.java,
+        )
     return message?.data.orEmpty()
 }
