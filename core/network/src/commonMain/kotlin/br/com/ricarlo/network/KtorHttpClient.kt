@@ -1,5 +1,6 @@
 package br.com.ricarlo.network
 
+import br.com.ricarlo.network.utils.json
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpClientPlugin
 import io.ktor.client.plugins.HttpTimeout
@@ -18,7 +19,6 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.URLProtocol
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.json.Json
 
 object KtorHttpClient {
     fun httpClient(
@@ -41,14 +41,7 @@ object KtorHttpClient {
             sanitizeHeader { header -> header == HttpHeaders.Authorization }
         }
         install(ContentNegotiation) {
-            json(
-                Json {
-                    prettyPrint = true
-                    isLenient = true
-                    ignoreUnknownKeys = true
-                    encodeDefaults = true
-                },
-            )
+            json(json)
         }
         install(HttpTimeout) {
             requestTimeoutMillis = BuildConfig.TIMEOUT.toLong()

@@ -1,7 +1,5 @@
 #!/bin/sh
 
-staged_files=$(git diff --staged --name-only)
-
 echo "🧹 Formatting code in staged files…"
 ./gradlew spotlessApply
 git diff --staged --name-only | while IFS= read -r file; do
