@@ -8,13 +8,13 @@ internal const val NOTIFICATION_URI_KEY = "uri"
 
 interface IDeepLinkHandler {
     fun processDeepLink(uri: String?)
+
     fun processMessage(remoteMessage: Map<String, Any>)
 }
 
 internal class DeepLinkHandler(
-    private val scope: CoroutineScope
+    private val scope: CoroutineScope,
 ) : IDeepLinkHandler {
-
     override fun processDeepLink(uri: String?) {
         if (uri.isNullOrEmpty()) return
         scope.launch {

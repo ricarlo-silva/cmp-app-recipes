@@ -10,7 +10,7 @@ internal interface ApiHome {
 }
 
 internal class ApiHomeImpl(
-    private val httpClient: HttpClient
+    private val httpClient: HttpClient,
 ) : ApiHome {
     override suspend fun getFruits(): List<FruitResponse> {
         // https://github.com/public-apis/public-apis?tab=readme-ov-file

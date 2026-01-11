@@ -1,0 +1,4 @@
+compose-custom-rules:
+  active: true
+  NoDisposableEffectWithoutKey:
+    active: true

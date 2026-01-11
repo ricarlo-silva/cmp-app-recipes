@@ -7,13 +7,13 @@ import io.ktor.client.request.setBody
 
 interface IApiNotification {
     suspend fun registerToken(token: String)
+
     suspend fun registerMetric(data: Map<String, Any>)
 }
 
 internal class ApiNotification(
-    private val httpClient: HttpClient
+    private val httpClient: HttpClient,
 ) : IApiNotification {
-
     override suspend fun registerToken(token: String) {
         httpClient.post("functions/v1/notification-token") {
             setBody(TokenRequest(token))

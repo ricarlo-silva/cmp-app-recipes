@@ -16,6 +16,8 @@ dependencies {
     compileOnly(libs.plugins.androidApplication.toDep())
     compileOnly(libs.plugins.kotlinAndroid.toDep())
     compileOnly(libs.plugins.kotlinMultiplatform.toDep())
+    compileOnly(libs.plugins.detekt.toDep())
+    compileOnly(libs.plugins.spotless.toDep())
 }
 
 fun Provider<PluginDependency>.toDep() = map {
@@ -35,6 +37,10 @@ gradlePlugin {
         register("androidLibrary") {
             id = "recipes.convention.library"
             implementationClass = "AndroidLibraryPlugin"
+        }
+        register("codeAnalysis") {
+            id = "recipes.convention.analysis"
+            implementationClass = "AnalysisConventionPlugin"
         }
     }
 }

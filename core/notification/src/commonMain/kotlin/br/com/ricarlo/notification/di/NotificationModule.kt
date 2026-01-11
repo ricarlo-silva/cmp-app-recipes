@@ -8,7 +8,8 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val notificationModule = module {
-    singleOf(::FcmHandler) bind IFcmHandler::class
-    singleOf(::ApiNotification) bind IApiNotification::class
-}
+val notificationModule =
+    module {
+        singleOf(::FcmHandler) bind IFcmHandler::class
+        singleOf(::ApiNotification) bind IApiNotification::class
+    }

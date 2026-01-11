@@ -1,0 +1,42 @@
+root = true
+
+# ===========================================================
+# Global settings
+# ===========================================================
+[*]
+indent_style = space
+indent_size = 4
+tab_width = 4
+end_of_line = lf
+charset = utf-8
+# trim_trailing_whitespace = true
+insert_final_newline = true
+max_line_length = 120
+
+# ===========================================================
+# Kotlin files
+# ===========================================================
+[*.{kt,kts}]
+ktlint_standard = enabled
+ktlint_code_style = intellij_idea
+# ktlint_standard_comment-spacing = disabled
+# ktlint_standard_package-name = disabled
+# ktlint_standard_function-naming = disabled
+# ktlint_function_naming_ignore_annotation_pattern = disabled
+# ktlint_standard_backing-property-naming = disabled
+ktlint_function_naming_ignore_when_annotated_with=Composable
+compose_allowed_composition_locals = LocalRadius,LocalSpacing,Stroke
+
+
+# ===========================================================
+# .md files
+# ===========================================================
+[*.md]
+indent_size = 2
+trim_trailing_whitespace = false
+
+# ===========================================================
+# .yml files
+# ===========================================================
+[*.{yml,yaml}]
+indent_size = 2

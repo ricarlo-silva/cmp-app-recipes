@@ -11,7 +11,7 @@ internal actual fun Module.includeModule() = Unit
 fun createIosModule(
     crashlytics: CrashlyticsProvider,
     remoteConfig: RemoteConfigProvider,
-    performance: PerformanceProvider
+    performance: PerformanceProvider,
 ) = module {
     single<CrashlyticsProvider> { crashlytics }
     single<RemoteConfigProvider> { remoteConfig }

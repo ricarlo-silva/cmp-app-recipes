@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 internal class HomeViewModel(
-    private val homeRepository: HomeRepository
+    private val homeRepository: HomeRepository,
 ) : ViewModel() {
     private val _state = MutableStateFlow("Loading...")
     val state = _state.asStateFlow()

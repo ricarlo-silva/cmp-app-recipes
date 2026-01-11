@@ -14,7 +14,7 @@ data class Radius(
     val small: Dp = RadiusDefaults.Small,
     val medium: Dp = RadiusDefaults.Medium,
     val large: Dp = RadiusDefaults.Large,
-    val extraLarge: Dp = RadiusDefaults.ExtraLarge
+    val extraLarge: Dp = RadiusDefaults.ExtraLarge,
 )
 
 internal data object RadiusDefaults {

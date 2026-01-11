@@ -5,9 +5,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 internal class CrashlyticsProviderImpl(
-    private val scope: CoroutineScope
+    private val scope: CoroutineScope,
 ) : CrashlyticsProvider {
-
     private val crashlytics: FirebaseCrashlytics by lazy {
         FirebaseCrashlytics.getInstance()
     }
@@ -30,7 +29,10 @@ internal class CrashlyticsProviderImpl(
         }
     }
 
-    override fun setCustomKey(key: String, value: Any) {
+    override fun setCustomKey(
+        key: String,
+        value: Any,
+    ) {
         scope.launch {
             when (value) {
                 is Boolean -> crashlytics.setCustomKey(key, value)
@@ -39,11 +41,12 @@ internal class CrashlyticsProviderImpl(
                 is Int -> crashlytics.setCustomKey(key, value)
                 is Long -> crashlytics.setCustomKey(key, value)
                 is String -> crashlytics.setCustomKey(key, value)
-                else -> crashlytics.recordException(
-                    IllegalArgumentException(
-                        "Unsupported type: ${value.javaClass.name} for key $key with value $value"
+                else ->
+                    crashlytics.recordException(
+                        IllegalArgumentException(
+                            "Unsupported type: ${value.javaClass.name} for key $key with value $value",
+                        ),
                     )
-                )
             }
         }
     }

@@ -9,5 +9,5 @@ internal data class Nutrition(
     @SerialName("fat") val fat: Double,
     @SerialName("sugar") val sugar: Double,
     @SerialName("carbohydrates") val carbohydrates: Double,
-    @SerialName("protein") val protein: Double
+    @SerialName("protein") val protein: Double,
 )

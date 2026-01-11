@@ -6,6 +6,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-internal val dataModule = module {
-    singleOf(::AuthRepositoryImpl) bind AuthRepository::class
-}
+internal val dataModule =
+    module {
+        singleOf(::AuthRepositoryImpl) bind AuthRepository::class
+    }

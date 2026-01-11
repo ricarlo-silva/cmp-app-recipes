@@ -11,6 +11,10 @@ plugins {
     alias(libs.plugins.firebase.crashlytics).apply(false)
     alias(libs.plugins.firebase.perf).apply(false)
     alias(libs.plugins.modulegraph).apply(true)
+    alias(libs.plugins.kotlin.parcelize).apply(false)
+    alias(libs.plugins.spotless).apply(false)
+    alias(libs.plugins.detekt).apply(false)
+    alias(libs.plugins.kotlin.jvm).apply(false)
 }
 
 moduleGraphConfig {

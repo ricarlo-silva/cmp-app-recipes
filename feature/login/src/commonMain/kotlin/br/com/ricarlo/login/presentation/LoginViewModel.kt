@@ -26,7 +26,7 @@ internal class LoginViewModel(
     private val authRepository: AuthRepository,
     private val crashlytics: CrashlyticsProvider,
     private val remoteConfig: RemoteConfigProvider,
-    private val performance: PerformanceProvider
+    private val performance: PerformanceProvider,
 ) : ViewModel() {
     private val _state = MutableStateFlow(LoginState())
     val state = _state.asStateFlow()
@@ -40,13 +40,14 @@ internal class LoginViewModel(
             crashlytics.setCustomKey(key = "FLAVOR", value = BuildConfig.FLAVOR)
 
             val welcomeMessage = remoteConfig.getString(RemoteConfigKey.WELCOME_MESSAGE.key)
-            val googleLoginEnabled = remoteConfig.getBoolean(
-                RemoteConfigKey.GOOGLE_LOGIN_ENABLED.key
-            )
+            val googleLoginEnabled =
+                remoteConfig.getBoolean(
+                    RemoteConfigKey.GOOGLE_LOGIN_ENABLED.key,
+                )
             _state.update {
                 it.copy(
                     welcomeMessage = welcomeMessage,
-                    googleLoginEnabled = googleLoginEnabled
+                    googleLoginEnabled = googleLoginEnabled,
                 )
             }
         }
@@ -82,7 +83,7 @@ internal class LoginViewModel(
             runCatching {
                 authRepository.login(
                     username = state.value.username,
-                    password = state.value.password
+                    password = state.value.password,
                 )
                 crashlytics.setUserId(userId = state.value.username)
             }.onSuccess {
@@ -119,7 +120,8 @@ internal class LoginViewModel(
     private fun requestPermission(permission: Permission) {
         viewModelScope.launch {
             try {
-                permissionsController.getPermissionState(permission)
+                permissionsController
+                    .getPermissionState(permission)
                     .also { _sideEffect.emit(LoginSideEffect.ShowSnackbar("pre provide $it")) }
 
                 permissionsController.providePermission(permission)
@@ -139,11 +141,14 @@ data class LoginState(
     val password: String = "",
     val isLoading: Boolean = false,
     val passwordVisible: Boolean = false,
-    val googleLoginEnabled: Boolean = false
+    val googleLoginEnabled: Boolean = false,
 ) {
     fun withUsername(username: String) = copy(username = username)
+
     fun withPassword(password: String) = copy(password = password)
+
     fun loading(isLoading: Boolean) = copy(isLoading = isLoading)
+
     fun toggledPasswordVisibility() = copy(passwordVisible = !passwordVisible)
 
     val isLoginButtonEnabled: Boolean
@@ -151,16 +156,31 @@ data class LoginState(
 }
 
 sealed class LoginAction {
-    data class UsernameChanged(val username: String) : LoginAction()
-    data class PasswordChanged(val password: String) : LoginAction()
+    data class UsernameChanged(
+        val username: String,
+    ) : LoginAction()
+
+    data class PasswordChanged(
+        val password: String,
+    ) : LoginAction()
+
     data object LoginClicked : LoginAction()
+
     data object SignupClicked : LoginAction()
+
     data object ForgotPasswordClicked : LoginAction()
+
     data object GoogleLoginClicked : LoginAction()
+
     data object TogglePasswordVisibility : LoginAction()
 }
 
 sealed class LoginSideEffect {
-    data class ShowSnackbar(val message: String) : LoginSideEffect()
-    data class Navigate(val route: String) : LoginSideEffect()
+    data class ShowSnackbar(
+        val message: String,
+    ) : LoginSideEffect()
+
+    data class Navigate(
+        val route: String,
+    ) : LoginSideEffect()
 }

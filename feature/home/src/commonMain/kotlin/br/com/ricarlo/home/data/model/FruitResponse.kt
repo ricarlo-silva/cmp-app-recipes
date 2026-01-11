@@ -14,11 +14,12 @@ internal data class FruitResponse(
     @SerialName("nutritions") val nutrition: NutritionResponse,
 )
 
-internal fun FruitResponse.toFruit() = Fruit(
-    name = name,
-    id = id,
-    family = family,
-    order = order,
-    genus = genus,
-    nutrition = nutrition.toNutrition()
-)
+internal fun FruitResponse.toFruit() =
+    Fruit(
+        name = name,
+        id = id,
+        family = family,
+        order = order,
+        genus = genus,
+        nutrition = nutrition.toNutrition(),
+    )
