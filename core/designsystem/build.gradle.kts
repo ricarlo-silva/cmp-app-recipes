@@ -32,6 +32,5 @@ compose.resources {
 }
 
 dependencies {
-//    lintPublish(projects.tools.analysis)
     debugImplementation(compose.uiTooling)
 }

@@ -5,7 +5,10 @@ import io.gitlab.arturbosch.detekt.api.RuleSet
 import io.gitlab.arturbosch.detekt.api.RuleSetProvider
 
 class MyRuleSetProvider : RuleSetProvider {
-    override val ruleSetId: String = "MyRuleSet"
+    override val ruleSetId: String = "compose-custom-rules"
 
-    override fun instance(config: Config): RuleSet = RuleSet(ruleSetId, listOf(MyRule(config)))
+    override fun instance(config: Config): RuleSet = RuleSet(
+        ruleSetId,
+        listOf(NoDisposableEffectWithoutKey(config))
+    )
 }

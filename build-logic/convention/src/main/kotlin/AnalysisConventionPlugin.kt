@@ -33,13 +33,15 @@ class AnalysisConventionPlugin : Plugin<Project> {
         }
 
         // Detekt
-//        dependencies {
+        dependencies {
 //            add("detektPlugins", "io.nlopez.compose.rules:detekt:0.4.27")
 //            add("detektPlugins", "io.gitlab.arturbosch.detekt:detekt-formatting:1.23.8")
 ////                add("detektPlugins", "io.gitlab.arturbosch.detekt:detekt-rules-ktlint-wrapper:1.23.8")
 //            add("detektPlugins", "io.gitlab.arturbosch.detekt:detekt-rules-libraries:1.23.8")
 //            add("detektPlugins", "io.gitlab.arturbosch.detekt:detekt-rules-ruleauthors:1.23.8")
-//        }
+//            add("detektPlugins","io.nlopez.compose.rules:detekt-compose-rules:0.4.0")
+            add("detektPlugins", project(":tools:analysis"))
+        }
         configureDetekt()
         configureSpotless()
     }

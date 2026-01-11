@@ -12,7 +12,7 @@ targetSdk = "36"
 ktor = "3.3.3"
 coroutines = "1.10.2"
 koin = "4.1.1"
-lint = "31.13.0"
+lint = "31.13.2"
 detekt = "1.23.8"
 ktlint = "1.7.1"
 ktfmt = "0.54"
@@ -81,7 +81,7 @@ firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.
 firebase-perf = { id = "com.google.firebase.firebase-perf", version = "2.0.2" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-spotless = { id = "com.diffplug.spotless", version = "8.0.0" }
+spotless = { id = "com.diffplug.spotless", version = "8.1.0" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 # Plugins defined by this project
