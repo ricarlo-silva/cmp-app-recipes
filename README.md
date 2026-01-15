@@ -1,5 +1,6 @@
 # CMP App Recipes
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ricarlo-silva_cmp-app-recipes&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ricarlo-silva_cmp-app-recipes)
 [![Compose Multiplatform](https://img.shields.io/badge/Compose%20Multiplatform-1.7.3-blueviolet.svg)](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-overview.html)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.1.10-blue.svg)](https://kotlinlang.org/)
 
